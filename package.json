@@ -1,0 +1,36 @@
+{
+	"name": "nuxt-app",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "nuxt build",
+		"dev": "nuxt dev",
+		"generate": "nuxt generate",
+		"preview": "nuxt preview",
+		"postinstall": "nuxt prepare"
+	},
+	"prisma": {
+		"seed": "ts-node prisma/seed.js"
+	},
+	"devDependencies": {
+		"@nuxtjs/supabase": "^1.1.5",
+		"@pinia-plugin-persistedstate/nuxt": "^1.2.0",
+		"@types/node": "^20.11.5",
+		"nuxt": "^3.9.1",
+		"ts-node": "^10.9.2",
+		"vue": "^3.4.10",
+		"vue-router": "^4.2.5"
+	},
+	"dependencies": {
+		"@nuxtjs/tailwindcss": "^6.10.4",
+		"@pinia/nuxt": "^0.5.1",
+		"@prisma/client": "^5.8.1",
+		"@stripe/stripe-js": "^2.3.0",
+		"@supabase/supabase-js": "^2.39.3",
+		"nuxt-icon": "^0.6.8",
+		"nuxt-lodash": "^2.5.3",
+		"pinia": "^2.1.7",
+		"prisma": "^5.8.1",
+		"stripe": "^14.12.0"
+	}
+}
