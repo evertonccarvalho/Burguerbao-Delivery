@@ -3,14 +3,15 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"build": "nuxt build",
+		"build": "prisma generate && nuxt build",
 		"dev": "nuxt dev",
 		"generate": "nuxt generate",
 		"preview": "nuxt preview",
 		"postinstall": "nuxt prepare"
 	},
 	"prisma": {
-		"seed": "ts-node prisma/seed.js"
+		"seed": "ts-node prisma/seed.js",
+		"postinstall": "prisma generate"
 	},
 	"devDependencies": {
 		"@nuxtjs/supabase": "^1.1.5",
