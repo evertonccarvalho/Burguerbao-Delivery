@@ -8,6 +8,7 @@ export default defineNuxtConfig({
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/supabase',
 	],
+	ssr: false,
 	supabase: {
 		redirect: false,
 	},
