@@ -1,0 +1,75 @@
+<template>
+	<div class="w-full md:block">
+		<div class="relative">
+			<div
+				class="flex items-center p-0 m-0 border-none bg-white rounded-full w-full"
+			>
+				<input
+					class="w-full h-full bg-transparent text-black placeholder-gray-400 text-sm pl-3 focus:outline-none"
+					placeholder="kitchen accessories"
+					type="text"
+					v-model="searchItem"
+				/>
+				<Icon
+					v-if="isSearching"
+					name="eos-icons:loading"
+					size="25"
+					class="mr-2"
+				/>
+				<button
+					class="flex items-center w-14 h-8 p-1.5 px-4 m-1 rounded-full bg-black"
+				>
+					<Icon name="ph:magnifying-glass" size="20" color="#ffffff" />
+				</button>
+			</div>
+
+			<div
+				v-if="items && items.data"
+				class="absolute bg-white max-w-[700px] rounded-3xl p-4 mt-0.5 h-auto w-full"
+			>
+				<div v-for="item in items.data" :key="item.id" class="p-1">
+					<NuxtLink
+						:to="`/item/${item.id}`"
+						class="flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
+					>
+						<div class="flex items-center">
+							<img class="rounded-md" width="40" :src="item.url" />
+							<div class="truncate ml-2">{{ item.title }}</div>
+						</div>
+						<div class="truncate">R${{ item.price / 100 }}</div>
+					</NuxtLink>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>
+
+<script setup>
+let isSearching = ref(false);
+let searchItem = ref('');
+let items = ref(null);
+
+onMounted(() => (isSearching.value = false));
+
+const searchByName = useDebounce(async () => {
+	isSearching.value = true;
+	items.value = await useFetch(
+		`/api/prisma/search-by-name/${searchItem.value}`
+	);
+	isSearching.value = false;
+}, 100);
+
+watch(
+	() => searchItem.value,
+	async () => {
+		if (!searchItem.value) {
+			setTimeout(() => {
+				items.value = '';
+				isSearching.value = false;
+				return;
+			}, 500);
+		}
+		searchByName();
+	}
+);
+</script>
