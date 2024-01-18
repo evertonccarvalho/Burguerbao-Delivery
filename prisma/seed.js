@@ -8,7 +8,8 @@ async function main() {
 			data: {
 				name: 'Hamburguer',
 				slug: 'hamburguer',
-				imageUrl: 'https://fsw-store.s3.sa-east-1.amazonaws.com/mouses.png',
+				imageUrl:
+					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/hamburguer.png?t=2024-01-18T17%3A48%3A00.815Z',
 			},
 		});
 
@@ -122,7 +123,8 @@ async function main() {
 			data: {
 				name: 'Refrigerantes',
 				slug: 'refrigerantes',
-				imageUrl: 'https://fsw-store.s3.sa-east-1.amazonaws.com/keyboards.png',
+				imageUrl:
+					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/coca.png?t=2024-01-18T17%3A47%3A11.486Z',
 			},
 		});
 
@@ -130,7 +132,7 @@ async function main() {
 			{
 				title: 'Coca-Cola',
 				description: 'Refrigerante gaseificado à base de cola.',
-				url: 'https://picsum.photos/id/7/800/800',
+				url: 'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/coca.png?t=2024-01-18T17%3A47%3A11.486Z',
 				price: 2500,
 				categoryId: refrigerantesCategory.id,
 				discountPercentage: 10, // 10% discount
@@ -138,7 +140,7 @@ async function main() {
 			{
 				title: 'Pepsi',
 				description: 'Refrescante refrigerante com sabor de cola.',
-				url: 'https://picsum.photos/id/17/800/800',
+				url: 'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/pepsi.png?t=2024-01-18T17%3A47%3A26.379Z',
 				price: 2300,
 				categoryId: refrigerantesCategory.id,
 				discountPercentage: 5, // 5% discount
@@ -146,7 +148,7 @@ async function main() {
 			{
 				title: 'Sprite',
 				description: 'Refrigerante cítrico e não cola com sabor de limão-lima.',
-				url: 'https://picsum.photos/id/27/800/800',
+				url: 'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/sprite.png',
 				price: 2200,
 				categoryId: refrigerantesCategory.id,
 				discountPercentage: 0,
