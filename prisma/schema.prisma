@@ -40,12 +40,23 @@ model OrderItem {
   product    Products  @relation(fields: [productId], references: [id])
 }
 
+model Category {
+  id       String     @id @default(uuid())
+  name     String
+  slug     String
+  imageUrl String
+  product  Products[]
+}
+
 model Products {
-  id          Int         @id @default(autoincrement())
-  title       String
-  description String
-  url         String
-  price       Int
-  created_at  DateTime?   @default(now()) @db.Timestamptz(6)
-  orderItem   OrderItem[]
+  id                 Int         @id @default(autoincrement())
+  title              String
+  description        String
+  url                String
+  price              Int
+  created_at         DateTime?   @default(now()) @db.Timestamptz(6)
+  orderItem          OrderItem[]
+  categoryId         String
+  category           Category    @relation(fields: [categoryId], references: [id])
+  discountPercentage Int         @default(0)
 }
