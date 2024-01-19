@@ -1,7 +1,3 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
-
 async function main() {
 	try {
 		const hamburguerCategory = await prisma.category.create({
@@ -10,15 +6,6 @@ async function main() {
 				slug: 'hamburguer',
 				imageUrl:
 					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/hamburguer.png?t=2024-01-18T17%3A48%3A00.815Z',
-			},
-		});
-
-		const refrigerantesCategory = await prisma.category.create({
-			data: {
-				name: 'Refrigerantes',
-				slug: 'refrigerantes',
-				imageUrl:
-					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/coca.png?t=2024-01-18T17%3A47%3A11.486Z',
 			},
 		});
 
@@ -36,6 +23,7 @@ async function main() {
 				price: 2500,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer Vegetariano Delicioso',
@@ -50,6 +38,7 @@ async function main() {
 				price: 1999,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer Vegetariano Delicioso',
@@ -64,6 +53,7 @@ async function main() {
 				price: 1999,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer de Frango Apimentado',
@@ -78,6 +68,7 @@ async function main() {
 				price: 9999,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer de Peixe Fresco',
@@ -92,6 +83,7 @@ async function main() {
 				price: 5999,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer Duplo Bacon',
@@ -106,6 +98,7 @@ async function main() {
 				price: 6589,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer de Costela Defumada',
@@ -120,6 +113,7 @@ async function main() {
 				price: 7899,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer de Costela Defumada',
@@ -134,6 +128,7 @@ async function main() {
 				price: 7899,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer Picante de Jalapeño',
@@ -148,6 +143,7 @@ async function main() {
 				price: 1450,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer Picante de Jalapeño',
@@ -162,6 +158,7 @@ async function main() {
 				price: 1450,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [1, 2, 3], // IDs dos extras associados
 			},
 			{
 				title: 'Hamburguer Picante de Jalapeño',
@@ -176,8 +173,18 @@ async function main() {
 				price: 1450,
 				categoryId: hamburguerCategory.id,
 				discountPercentage: 10, // 10% discount
+				extras: [], // IDs dos extras associados
 			},
 		];
+
+		const refrigerantesCategory = await prisma.category.create({
+			data: {
+				name: 'Refrigerantes',
+				slug: 'refrigerantes',
+				imageUrl:
+					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/coca.png?t=2024-01-18T17%3A47%3A11.486Z',
+			},
+		});
 
 		const drinks = [
 			{
@@ -186,6 +193,7 @@ async function main() {
 				imageUrls: [
 					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/coca.png?t=2024-01-18T17%3A47%3A11.486Z',
 				],
+				url: '',
 				price: 2500,
 				categoryId: refrigerantesCategory.id,
 				discountPercentage: 10, // 10% discount
@@ -218,22 +226,16 @@ async function main() {
 				name: 'Ovo',
 				description: 'Descrição do Extra 1',
 				price: 250, // Em centavos (R$2.50)
-				imageUrl:
-					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/sprite.png',
 			},
 			{
 				name: 'Queijo',
 				description: 'Descrição do Extra 2',
 				price: 300, // Em centavos (R$3.00)
-				imageUrl:
-					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/sprite.png',
 			},
 			{
 				name: 'Calabresa',
 				description: 'Descrição do Extra 3',
 				price: 250, // Em centavos (R$1.00)
-				imageUrl:
-					'https://mumttahimuhgqbemzydu.supabase.co/storage/v1/object/public/ean-store/sprite.png',
 			},
 		];
 
@@ -249,7 +251,6 @@ async function main() {
 			data: extrasData,
 		});
 
-		// Adicione mais produtos conforme necessário
 		console.log('Seed completed successfully');
 	} catch (error) {
 		console.error('Error seeding database:', error);
@@ -257,12 +258,3 @@ async function main() {
 		await prisma.$disconnect();
 	}
 }
-main()
-	.then(async () => {
-		await prisma.$disconnect();
-	})
-	.catch(async (e) => {
-		console.error(e);
-		await prisma.$disconnect();
-		process.exit(1);
-	});

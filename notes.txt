@@ -15,9 +15,14 @@ npx prisma migrate reset
 // Pull from DB
 npx prisma db pull
 
+// Push from DB
+npx prisma db push
+
 // Create DB tables 
 npx prisma migrate dev --name init
 
 npx prisma generate
 
+// Reset db
 
+npx prisma db push --force-reset
