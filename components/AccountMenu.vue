@@ -9,8 +9,8 @@
 				: 'border border-none'
 		"
 	>
-		<Icon name="ph:user-thin" size="33" />
-		Account
+		<Icon name="ph:user" size="33" />
+
 		<Icon name="mdi:chevron-down" size="15" />
 
 		<div
@@ -25,7 +25,7 @@
 				<div class="flex items-center gap-1 px-3 mb-3">
 					<NuxtLink
 						to="/auth"
-						class="bg-[#FF4646] text-center w-full text-[16px] rounded-sm text-white font-semibold p-2"
+						class="bg-[#ff840b] text-center w-full text-[16px] rounded-sm text-white font-semibold p-2"
 					>
 						Login / Register
 					</NuxtLink>

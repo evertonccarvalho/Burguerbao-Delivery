@@ -1,5 +1,8 @@
 <template>
-	<div id="MainLayout" class="w-full flex items-center flex-col z-50">
+	<div
+		id="MainLayout"
+		class="w-screen flex bg-black items-center flex-col z-50"
+	>
 		<MainHeader />
 		<TopMenu />
 		<Loading v-if="userStore.isLoading" />

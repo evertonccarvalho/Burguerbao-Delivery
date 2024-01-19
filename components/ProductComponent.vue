@@ -19,7 +19,7 @@
 
 				<div id="DetalhesProduto" class="flex flex-col py-4 px-5">
 					<span class="flex items-center justify-start gap-2 px-1">
-						<span class="text-[#FF6674] font-semibold"
+						<span class="text-[#ff840b] font-semibold"
 							>R$ {{ priceComputed }}</span
 						>
 						<span class="text-gray-500 text-sm text-light line-through"
@@ -27,13 +27,13 @@
 						>
 					</span>
 
-					<span class="px-1 relative text-[#FF6674] text-xs font-semibold">
+					<span class="px-1 relative text-[#ff840b] text-xs font-semibold">
 						Extra 5% de desconto
 					</span>
 
 					<!-- <div class="flex items-center gap-1 px-1 relative -top-1">
 						<span
-							class="bg-[#FD374F] text-white text-[9px] font-semibold px-1.5 rounded-sm"
+							class="bg-[#ff840b] text-white text-[9px] font-semibold px-1.5 rounded-sm"
 							>Oferta de Boas-Vindas</span
 						>
 						<span

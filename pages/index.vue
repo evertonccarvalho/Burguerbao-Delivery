@@ -1,7 +1,7 @@
 <template>
 	<MainLayout>
 		<div id="IndexPage" class="mt-4 container mx-auto px-2">
-			<section id="HeroBanner"></section>
+			<HeroBanner />
 			<!-- PRODUTOS EM DESTAQUE -->
 			<section
 				class="md:grid flex flex-col md:grid-cols-9 grid-cols-1 py-4 gap-4"
@@ -12,7 +12,7 @@
 				>
 					<h1 class="text-2xl p-2 w-full text-center bg font-bold">Destaque</h1>
 
-					<div class="w-full h-full flex flex-col md:overflow-y-scroll">
+					<div class="w-full h-full flex flex-col">
 						<div
 							v-if="products"
 							class="flex md:flex-col overflow-x-scroll gap-4"
@@ -59,7 +59,7 @@
 						Lançamentos
 					</h1>
 
-					<div class="w-full h-full flex flex-col md:overflow-y-scroll">
+					<div class="w-full h-full flex flex-col">
 						<div
 							v-if="products"
 							class="flex md:flex-col overflow-x-scroll gap-4"

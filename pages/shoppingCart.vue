@@ -13,7 +13,7 @@
 					<div v-if="!user" class="flex text-center">
 						<NuxtLink
 							to="/auth"
-							class="bg-[#FD374F] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
+							class="bg-[#ff840b] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
 						>
 							Sign in
 						</NuxtLink>
@@ -30,7 +30,7 @@
 					</div>
 
 					<div class="bg-[#FEEEEF] rounded-lg p-4 mt-4">
-						<div class="text-red-500 font-bold">
+						<div class="[#ff840b] font-bold">
 							Oferta de Boas-Vindas aplicável a apenas 1 item
 						</div>
 					</div>
@@ -59,7 +59,7 @@
 						</div>
 						<button
 							@click="goToCheckout"
-							class="flex items-center justify-center bg-[#FD374F] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
+							class="flex items-center justify-center bg-[#ff840b] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
 						>
 							Checkout
 						</button>

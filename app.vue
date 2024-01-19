@@ -1,5 +1,5 @@
 <template>
-	<div class="z-[-1] bg-[#F2F2F2] w-full h-screen">
+	<div class="z-[-1] w-full h-screen">
 		<NuxtPage />
 		<MenuOverlay
 			:class="[
