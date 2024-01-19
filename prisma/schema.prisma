@@ -52,11 +52,22 @@ model Products {
   id                 Int         @id @default(autoincrement())
   title              String
   description        String
-  url                String
+  imageUrls          String[]
   price              Int
-  created_at         DateTime?   @default(now()) @db.Timestamptz(6)
   categoryId         String
   discountPercentage Int         @default(0)
-  orderItem          OrderItem[]
   category           Category    @relation(fields: [categoryId], references: [id])
+  orderItem          OrderItem[]
+  extras             Extras[]
+  created_at         DateTime?   @default(now()) @db.Timestamptz(6)
+}
+
+model Extras {
+  id          Int       @id @default(autoincrement())
+  name        String
+  price       Int
+  description String
+  productId   Int
+  product     Products  @relation(fields: [productId], references: [id])
+  createdAt   DateTime? @default(now()) @db.Timestamptz(6)
 }

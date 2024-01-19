@@ -61,6 +61,18 @@ CREATE TABLE "Products" (
     CONSTRAINT "Products_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Extras" (
+    "id" SERIAL NOT NULL,
+    "name" TEXT NOT NULL,
+    "price" INTEGER NOT NULL,
+    "description" TEXT NOT NULL,
+    "productId" INTEGER NOT NULL,
+    "createdAt" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
+
+    CONSTRAINT "Extras_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Addresses_userId_key" ON "Addresses"("userId");
 
@@ -72,3 +84,6 @@ ALTER TABLE "OrderItem" ADD CONSTRAINT "OrderItem_productId_fkey" FOREIGN KEY ("
 
 -- AddForeignKey
 ALTER TABLE "Products" ADD CONSTRAINT "Products_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Extras" ADD CONSTRAINT "Extras_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Products"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
