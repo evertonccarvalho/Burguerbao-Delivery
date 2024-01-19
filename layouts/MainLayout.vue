@@ -7,9 +7,7 @@
 		<TopMenu />
 		<Loading v-if="userStore.isLoading" />
 
-		<div class="container mx-auto p-4">
-			<slot />
-		</div>
+		<slot />
 		<Footer v-if="!userStore.isLoading" />
 	</div>
 </template>

@@ -1,7 +1,7 @@
 <template>
 	<MainLayout>
+		<HeroBanner />
 		<div id="IndexPage" class="mt-4 container mx-auto px-2">
-			<HeroBanner />
 			<!-- PRODUTOS EM DESTAQUE -->
 			<section
 				class="md:grid flex flex-col md:grid-cols-9 grid-cols-1 py-4 gap-4"

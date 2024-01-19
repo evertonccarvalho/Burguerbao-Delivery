@@ -1,7 +1,6 @@
 <template>
 	<div
 		class="bg-cover bg-center w-full md:h-[500px] content-center flex items-center"
-		style="background-image: url('/promotion/Background.png')"
 	>
 		<div class="mx-auto flex items-center py-4 flex-col">
 			<div
