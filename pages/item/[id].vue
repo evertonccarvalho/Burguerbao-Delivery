@@ -2,28 +2,41 @@
 	<MainLayout>
 		<div id="ItemPage" class="mt-4 max-w-[1200px] mx-auto px-2">
 			<div class="md:flex gap-4 justify-between mx-auto w-full">
-				<div class="md:w-[40%]">
-					<img
-						v-if="currentImage"
-						class="rounded-lg object-fit"
-						:src="currentImage"
-					/>
+				<div
+					v-if="product && product.data"
+					class="md:w-[40%] rounded-lg bg-slate-200 p-2"
+				>
 					<div
-						v-if="images[0] !== ''"
-						class="flex items-center justify-center mt-2"
+						class="flex h-[400px] w-full items-center justify-center rounded-lg bg-slate-300"
 					>
-						<div v-for="image in images" :key="image">
+						<img
+							v-if="currentImage"
+							class="rounded-lg object-fit h-auto max-h-[80%] w-auto max-w-[90%]"
+							sizes="100vw"
+							:src="currentImage"
+						/>
+					</div>
+					<div
+						v-if="product.data.imageUrls && product.data.imageUrls.length > 1"
+						class="flex items-center gap-2 justify-center mt-2"
+					>
+						<div
+							class="flex gap-2 h-32 w-32 border-[3px] items-center bg-slate-300 justify-center rounded-md"
+							v-for="image in product.data.imageUrls"
+							:class="currentImage === image ? 'border-[#ff840b]' : ''"
+							:key="image"
+						>
 							<img
-								@mouseover="currentImage = image"
-								@click="currentImage = image"
-								width="70"
-								class="rounded-md object-fit border-[3px] cursor-pointer"
-								:class="currentImage === image ? 'border-[#FF5353]' : ''"
+								@mouseover="setCurrentImage(image)"
+								@click="setCurrentImage(image)"
+								sizes="full"
+								class="rounded-md cursor-pointer h-auto max-h-[80%] w-auto max-w-[90%]"
 								:src="image"
 							/>
 						</div>
 					</div>
 				</div>
+
 				<div class="md:w-[60%] bg-white p-3 rounded-lg">
 					<div v-if="product && product.data">
 						<p class="mb-2">{{ product.data.title }}</p>
@@ -95,6 +108,9 @@ const route = useRoute();
 
 let product = ref(null);
 let currentImage = ref(null);
+const setCurrentImage = (image) => {
+	currentImage.value = image;
+};
 
 onBeforeMount(async () => {
 	product.value = await useFetch(
@@ -104,8 +120,14 @@ onBeforeMount(async () => {
 
 watchEffect(() => {
 	if (product.value && product.value.data) {
-		currentImage.value = product.value.data.url;
-		images.value[0] = product.value.data.url;
+		// Atualiza a variável currentImage com o valor de product.value.data.imageUrls
+		currentImage.value = product.value.data.imageUrls;
+
+		// Atribui o primeiro elemento do array product.value.data.imageUrls a ele mesmo
+		// Isso pode não ter o efeito desejado, pois está substituindo o primeiro elemento pelo array completo
+		product.value.data.imageUrls = product.value.data.imageUrls;
+
+		// Define userStore.isLoading como falso
 		userStore.isLoading = false;
 	}
 });
@@ -126,15 +148,6 @@ const priceComputed = computed(() => {
 	}
 	return '0.00';
 });
-
-const images = ref([
-	'',
-	'https://picsum.photos/id/212/800/800',
-	'https://picsum.photos/id/233/800/800',
-	'https://picsum.photos/id/165/800/800',
-	'https://picsum.photos/id/99/800/800',
-	'https://picsum.photos/id/144/800/800',
-]);
 
 const addToCart = () => {
 	userStore.cart.push(product.value.data);

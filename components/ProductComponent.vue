@@ -12,7 +12,7 @@
 						<img
 							class="h-auto max-h-[80%] w-auto max-w-[90%]"
 							sizes="100vw"
-							:src="product.url"
+							:src="product.imageUrls"
 						/>
 					</div>
 				</div>
@@ -28,7 +28,7 @@
 					</span>
 
 					<span class="px-1 relative text-[#ff840b] text-xs font-semibold">
-						Extra 5% de desconto
+						Extra {{ discountPercentage }}% de desconto
 					</span>
 
 					<!-- <div class="flex items-center gap-1 px-1 relative -top-1">
@@ -74,11 +74,11 @@ const { product } = toRefs(props);
 const priceComputed = computed(() => {
 	return (product.value.price / 100).toFixed(2);
 });
-
+const discountPercentage = product.value.discountPercentage || 0;
 const oldPriceComputed = computed(() => {
-	const res = ((product.value.price + product.value.price / 20) / 100).toFixed(
-		2
-	);
-	return res;
+	const discountPercentage = product.value.discountPercentage || 0; // Se discountPercentage não estiver definido, assume 0%
+	const discountedPrice =
+		product.value.price - (product.value.price * discountPercentage) / 100;
+	return (discountedPrice / 100).toFixed(2);
 });
 </script>
