@@ -1,13 +1,16 @@
 <template>
 	<MainLayout>
-		<div id="ItemPage" class="mt-4 max-w-[1200px] mx-auto px-2">
+		<div
+			id="ItemPage"
+			class="mt-4 container w-full flex p-4 h-screen mx-auto px-2"
+		>
 			<div class="md:flex gap-4 justify-between mx-auto w-full">
 				<div
 					v-if="product && product.data"
-					class="md:w-[40%] rounded-lg bg-secondary/50 p-2"
+					class="md:w-[40%] rounded-lg bg-card/50 p-2"
 				>
 					<div
-						class="flex h-[400px] w-full items-center justify-center rounded-lg bg-secondary"
+						class="flex h-[400px] w-full items-center justify-center rounded-lg bg-card"
 					>
 						<img
 							v-if="currentImage"
@@ -21,7 +24,7 @@
 						class="flex items-center gap-2 justify-center mt-2"
 					>
 						<div
-							class="flex gap-2 h-32 w-32 border-[3px] items-center bg-secondary justify-center rounded-md"
+							class="flex gap-2 h-32 w-32 border-[3px] items-center bg-card justify-center rounded-md"
 							v-for="image in product.data.imageUrls"
 							:class="currentImage === image ? 'border-primary' : ''"
 							:key="image"
@@ -37,7 +40,7 @@
 					</div>
 				</div>
 
-				<div class="md:w-[60%] bg-secondary/50 p-3 rounded-lg">
+				<div class="md:w-[60%] bg-card/50 w-full p-3 rounded-lg">
 					<div v-if="product && product.data">
 						<p class="mb-2">{{ product.data.title }}</p>
 						<p class="font-light text-[12px] mb-2">
@@ -72,7 +75,7 @@
 					<div class="flex items-center justify-start gap-2 my-2">
 						<div class="text-xl font-bold">R$ {{ priceComputed }}</div>
 						<span
-							class="bg-secondary-foreground border text-secondary text-[9px] font-semibold px-1.5 rounded-sm"
+							class="bg-card-foreground border text-secondary text-[9px] font-semibold px-1.5 rounded-sm"
 							>70% off</span
 						>
 					</div>

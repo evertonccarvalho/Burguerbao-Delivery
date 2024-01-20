@@ -1,7 +1,8 @@
 <template>
 	<div
 		id="MainLayout"
-		class="w-screen flex bg-background items-center flex-col z-50"
+		class="w-fullh h-screen flex bg-black items-center flex-col z-50"
+		style="background-image: url('/BG.jpg')"
 	>
 		<MainHeader />
 		<TopMenu />

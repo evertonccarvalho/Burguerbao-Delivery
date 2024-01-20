@@ -1,9 +1,12 @@
 <template>
 	<MainLayout>
-		<div id="CheckoutPage" class="mt-4 max-w-[1200px] mx-auto px-2">
+		<div
+			id="CheckoutPage"
+			class="mt-4 container w-full flex p-4 h-screen mx-auto px-2"
+		>
 			<div class="md:flex gap-4 justify-between mx-auto w-full">
 				<div class="md:w-[65%]">
-					<div class="bg-secondary/30 rounded-lg p-4">
+					<div class="bg-card rounded-lg p-4">
 						<div class="text-xl font-semibold mb-2">Endereço para envio</div>
 
 						<div v-if="currentAddress && currentAddress.data">
@@ -58,7 +61,7 @@
 						</NuxtLink>
 					</div>
 
-					<div id="Items" class="bg-secondary/30 rounded-lg p-4 mt-4">
+					<div id="Items" class="bg-card rounded-lg p-4 mt-4">
 						<div v-for="product in userStore.checkout" :key="product.id">
 							<CheckOutItem :product="product" />
 						</div>
@@ -67,8 +70,8 @@
 
 				<div class="md:hidden block my-4" />
 				<div class="md:w-[35%]">
-					<div id="PlaceOrder" class="bg-secondary/30 rounded-lg p-4">
-						<div class="text-2xl font-extrabold mb-2">Summary</div>
+					<div id="PlaceOrder" class="bg-card rounded-lg p-4">
+						<div class="text-2xl font-extrabold mb-2">Resumo</div>
 
 						<div class="flex items-center justify-between my-4">
 							<div class="">Frete</div>
@@ -86,7 +89,7 @@
 
 						<form @submit.prevent="pay()">
 							<div
-								class="border border-gray-500 p-2 rounded-sm"
+								class="border border-gray-500 bg-white p-2 rounded-sm"
 								id="card-element"
 							/>
 
@@ -108,7 +111,7 @@
 						</form>
 					</div>
 
-					<div class="bg-secondary/30 rounded-lg p-4 mt-4">
+					<div class="bg-card rounded-lg p-4 mt-4">
 						<div class="text-lg font-semibold mb-2 mt-2">BurguerBão</div>
 						<p class="my-2">
 							BurguerBão mantém suas informações e pagamento seguros

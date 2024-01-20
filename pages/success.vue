@@ -1,7 +1,10 @@
 <template>
 	<MainLayout>
-		<div id="SuccessPage" class="mt-4 max-w-[1200px] mx-auto px-2 min-h-[50vh]">
-			<div class="bg-white w-full p-6 min-h-[150px]">
+		<div
+			id="SuccessPage"
+			class="mt-4 container h-full mx-auto px-2 min-h-[50vh] w-full p-4"
+		>
+			<div class="bg-card w-full p-6 text-foreground min-h-[150px]">
 				<div class="flex items-center text-xl">
 					<Icon
 						name="clarity:success-standard-line"

@@ -1,7 +1,10 @@
 <template>
 	<MainLayout>
-		<div id="AddressPage" class="mt-4 max-w-[500px] mx-auto px-2">
-			<div class="mx-auto bg-secondary/30 rounded-lg p-3">
+		<div
+			id="AddressPage"
+			class="mt-4 container w-full flex p-4 h-screen mx-auto px-2"
+		>
+			<div class="mx-auto bg-card/30 max-w-[500px] rounded-lg p-3">
 				<div class="text-xl text-bold mb-2">Detalhes do Endereço</div>
 				<form @submit.prevent="submit()">
 					<TextInput

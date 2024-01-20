@@ -1,8 +1,8 @@
 <template>
-	<section class="flex flex-col" id="Categories">
+	<section class="flex gap-2 py-2 flex-col" id="Categories">
 		<div
 			:id="`ComponenteProduto${category.id}`"
-			class="flex flex-col bg-card-foreground rounded-full bg-category-item-gradient h-32 w-32 items-center justify-center cursor-pointer shrink-0 overflow-hidden hover:bg-slate-200"
+			class="flex flex-col bg-card-foreground rounded-full bg-category-item-gradient h-20 w-20 items-center justify-center cursor-pointer shrink-0 overflow-hidden hover:bg-slate-200"
 		>
 			<div class="flex h-20 w-full items-center justify-center rounded-md">
 				<img
@@ -12,9 +12,9 @@
 					alt="category"
 				/>
 			</div>
-			<div class="whitespace-nowrap text-xs font-bold tracking-tight">
-				<h3 class="text-center">{{ category.name }}</h3>
-			</div>
+		</div>
+		<div class="whitespace-nowrap text-xs font-bold tracking-tight">
+			<h3 class="text-center">{{ category.name }}</h3>
 		</div>
 	</section>
 </template>
