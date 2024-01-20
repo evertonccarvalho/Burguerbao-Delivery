@@ -1,7 +1,7 @@
 <template>
-	<div id="MainHeader" class="flex items-center w-full bg-card">
+	<div id="MainHeader" class="flex items-center w-full">
 		<div
-			class="flex lg:justify-start items-center justify-between gap-2 md:gap-8 container w-full py-5 mx-auto"
+			class="flex items-center justify-between gap-2 md:gap-8 container w-full py-5 mx-auto"
 		>
 			<!-- Logo -->
 			<HeaderLogo />

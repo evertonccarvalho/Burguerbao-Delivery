@@ -1,6 +1,14 @@
 <template>
 	<div class="flex justify-start my-2">
-		<img class="rounded-md md:w-[150px] w-[90px]" :src="product.url" />
+		<div
+			class="flex h-[90px] w-[90px] items-center justify-center rounded-xl bg-card"
+		>
+			<img
+				class="rounded-md h-auto max-h-[80%]"
+				sizes="100vw"
+				:src="product.imageUrls"
+			/>
+		</div>
 
 		<div class="overflow-hidden pl-2">
 			<div class="flex items-center">

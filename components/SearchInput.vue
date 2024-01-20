@@ -1,12 +1,10 @@
 <template>
-	<div class="w-full md:block">
+	<div class="w-full md:block z-10">
 		<div class="relative">
-			<div
-				class="flex items-center p-0 m-0 border-none bg-foreground rounded-full w-full"
-			>
+			<div class="flex items-center p-0 m-0 bg-foreground rounded-full w-full">
 				<input
 					class="w-full h-full bg-transparent text-black placeholder-gray-400 text-sm pl-3 focus:outline-none"
-					placeholder="kitchen accessories"
+					placeholder="Burguerbão"
 					type="text"
 					v-model="searchItem"
 				/>
@@ -25,18 +23,26 @@
 
 			<div
 				v-if="items && items.data"
-				class="absolute bg-white max-w-[700px] rounded-3xl p-4 mt-0.5 h-auto w-full"
+				class="absolute bg-foreground text-black rounded-3xl p-4 mt-0.5 h-auto w-full"
 			>
 				<div v-for="item in items.data" :key="item.id" class="p-1">
 					<NuxtLink
 						:to="`/item/${item.id}`"
-						class="flex items-center justify-between w-full cursor-pointer hover:bg-gray-100"
+						class="flex items-center justify-between w-full rounded-full cursor-pointer hover:bg-primary"
 					>
-						<div class="flex items-center">
-							<img class="rounded-md" width="40" :src="item.url" />
+						<div class="flex items-center mx-2">
+							<div
+								class="flex h-10 w-10 items-center justify-center rounded-xl"
+							>
+								<img
+									class="rounded-md h-auto max-h-[80%]"
+									sizes="100vw"
+									:src="item.imageUrls"
+								/>
+							</div>
 							<div class="truncate ml-2">{{ item.title }}</div>
 						</div>
-						<div class="truncate">R${{ item.price / 100 }}</div>
+						<div class="truncate mr-2">R${{ item.price / 100 }}</div>
 					</NuxtLink>
 				</div>
 			</div>

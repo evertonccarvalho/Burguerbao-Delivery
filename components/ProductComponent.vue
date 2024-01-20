@@ -5,9 +5,9 @@
 			class="min-h-[266px] min-w-[184px] inline-block group bg-card/50 rounded-xl cursor-pointer"
 		>
 			<NuxtLink :to="`/item/${product.id}`">
-				<div className="flex bg-re  flex-col">
+				<div class="flex bg-re flex-col">
 					<div
-						className="flex h-40 w-full items-center justify-center rounded-xl bg-card"
+						class="flex h-40 w-full items-center justify-center rounded-xl bg-card"
 					>
 						<img
 							class="h-auto max-h-[80%] group-hover:rotate-12 transition-all duration-300 w-auto max-w-[90%]"

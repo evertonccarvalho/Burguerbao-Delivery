@@ -26,14 +26,30 @@
 									class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
 									:to="`/item/${item.productId}`"
 								>
-									<img width="40" :src="item.product.url" />
+									<div
+										class="flex h-[40px] w-[40px] items-center justify-center rounded-xl bg-card"
+									>
+										<img
+											class="rounded-md h-auto max-h-[80%]"
+											sizes="100vw"
+											:src="item.product.imageUrls"
+										/>
+									</div>
 									{{ item.product.title }}
 								</NuxtLink>
 							</div>
 
-							<div class="pt-2 pb-5">
-								Endereço de Entrega: {{ order.name }}, {{ order.address }},
-								{{ order.zipcode }}, {{ order.city }}, {{ order.country }}
+							<div class="pt-2 pb-5 flex gap-4">
+								<div>
+									<p>Nome: {{ order.name }}</p>
+									<p>Rua: {{ order.address }}</p>
+									<div class="flex flex-row gap-4">
+										<p>Cidade: {{ order.city }}</p>
+										<p>Cep: {{ order.zipcode }}</p>
+										<p>Pais: {{ order.country }}</p>
+									</div>
+								</div>
+								<div></div>
 							</div>
 						</div>
 					</div>

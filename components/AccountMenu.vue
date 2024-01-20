@@ -2,49 +2,47 @@
 	<div
 		@mouseenter="isAccountMenu = true"
 		@mouseleave="isAccountMenu = false"
-		class="relative text-foreground gap-2 flex items-center hover:text-foreground h-full cursor-pointer"
+		class="relative text-foreground gap-2 flex items-center justify-end rounded-full hover:text-foreground h-full cursor-pointer"
 		:class="
 			isAccountMenu
-				? 'bg-transparent border-none z-40 shadow-[0_15px_100px_40px_rgba(0,0,0,0.3)]'
-				: 'border border-none'
+				? 'bg-transparen  z-40 shadow-[0_15px_100px_40px_rgba(0,0,0,0.3)]'
+				: ''
 		"
 	>
 		<Icon name="ph:user" size="33" />
-
 		<Icon name="mdi:chevron-down" size="15" />
 
 		<div
 			id="AccountMenu"
 			v-if="isAccountMenu"
-			class="absolute bg-foreground w-[220px] text-[#333333] z-40 top-[38px] -left-[100px] border-x border-b"
+			class="absolute w-[220px] text-foreground border border-primary z-40 bg-card p-2 top-[32px]"
 		>
 			<div v-if="!user">
 				<div class="text-semibold text-[15px] my-4 px-3">
-					Welcome to AliExpress!
+					Bem Vindo ao BurguerBão
 				</div>
 				<div class="flex items-center gap-1 px-3 mb-3">
 					<NuxtLink
 						to="/auth"
-						class="bg-primary text-center w-full text-[16px] rounded-sm text-foreground font-semibold p-2"
+						class="bg-primary text-center w-full text-[16px] rounded-lg text-foreground font-semibold p-2"
 					>
 						Login / Register
 					</NuxtLink>
 				</div>
 			</div>
-			<div class="border-b" />
-			<ul class="bg-foreground">
+			<ul class="bg-card rounded-lg">
 				<li
 					@click="navigateTo('/orders')"
-					class="text-[13px] py-2 px-4 w-full hover:bg-gray-200"
+					class="text-[13px] py-2 px-4 w-full rounded-lg hover:bg-muted"
 				>
-					My Orders
+					Meus Pedidos
 				</li>
 				<li
 					v-if="user"
 					@click="client.auth.signOut()"
-					class="text-[13px] py-2 px-4 w-full hover:bg-gray-200"
+					class="text-[13px] py-2 px-4 w-full rounded-lg hover:bg-muted"
 				>
-					Sign out
+					Sair
 				</li>
 			</ul>
 		</div>
