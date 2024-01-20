@@ -9,13 +9,12 @@
 				: ''
 		"
 	>
-		<Icon name="ph:user" size="33" />
-		<Icon name="mdi:chevron-down" size="15" />
+		<Icon name="mdi:account" size="33" />
 
 		<div
 			id="AccountMenu"
 			v-if="isAccountMenu"
-			class="absolute w-[220px] text-foreground border border-primary z-40 bg-card p-2 top-[32px]"
+			class="absolute w-[220px] text-foreground border border-primary z-40 bg-card p-2 top-[10px]"
 		>
 			<div v-if="!user">
 				<div class="text-semibold text-[15px] my-4 px-3">

@@ -1,5 +1,5 @@
 <template>
-	<NuxtLink to="/shoppingcart" class="flex items-center">
+	<NuxtLink to="/shoppingcart" class="flex gap-2 flex-row items-center">
 		<button
 			class="relative"
 			@mouseenter="isCartHover = true"
@@ -10,14 +10,13 @@
 			>
 				{{ userStore.cart.length }}
 			</span>
-			<div class="min-w-[40px]">
-				<Icon
-					name="ph:shopping-cart-simple-light"
-					size="33"
-					:color="isCartHover ? '#ffff' : '#ffff'"
-				/>
-			</div>
+			<Icon
+				name="mdi:cart"
+				size="33"
+				:color="isCartHover ? '#ffff' : '#ffff'"
+			/>
 		</button>
+		<p class="hidden md:flex">Carrinho</p>
 	</NuxtLink>
 </template>
 

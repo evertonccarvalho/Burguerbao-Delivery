@@ -4,8 +4,10 @@
 		class="w-fullh h-screen flex bg-black items-center flex-col z-50"
 		style="background-image: url('/BG.jpg')"
 	>
-		<MainHeader />
-		<TopMenu />
+		<Header />
+		<div class="pb-20" />
+		<!-- <MainHeader /> -->
+		<!-- <TopMenu /> -->
 		<Loading v-if="userStore.isLoading" />
 
 		<slot />

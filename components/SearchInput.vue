@@ -1,5 +1,5 @@
 <template>
-	<div class="w-full md:block z-10">
+	<div class="w-full block z-10">
 		<div class="relative">
 			<div class="flex items-center p-0 m-0 bg-foreground rounded-full w-full">
 				<input

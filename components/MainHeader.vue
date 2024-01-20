@@ -16,7 +16,7 @@
 			<AccountMenu />
 			<!-- ACCOUNT MENU -->
 			<!-- MOBILE MENU -->
-			<MobileMenuButton />
+			<!-- <MobileMenuButton /> -->
 			<!-- MOBILE MENU -->
 		</div>
 	</div>
