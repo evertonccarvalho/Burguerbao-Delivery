@@ -4,10 +4,10 @@
 			<div class="md:flex gap-4 justify-between mx-auto w-full">
 				<div
 					v-if="product && product.data"
-					class="md:w-[40%] rounded-lg bg-slate-200 p-2"
+					class="md:w-[40%] rounded-lg bg-secondary/50 p-2"
 				>
 					<div
-						class="flex h-[400px] w-full items-center justify-center rounded-lg bg-slate-300"
+						class="flex h-[400px] w-full items-center justify-center rounded-lg bg-secondary"
 					>
 						<img
 							v-if="currentImage"
@@ -21,9 +21,9 @@
 						class="flex items-center gap-2 justify-center mt-2"
 					>
 						<div
-							class="flex gap-2 h-32 w-32 border-[3px] items-center bg-slate-300 justify-center rounded-md"
+							class="flex gap-2 h-32 w-32 border-[3px] items-center bg-secondary justify-center rounded-md"
 							v-for="image in product.data.imageUrls"
-							:class="currentImage === image ? 'border-[#ff840b]' : ''"
+							:class="currentImage === image ? 'border-primary' : ''"
 							:key="image"
 						>
 							<img
@@ -37,7 +37,7 @@
 					</div>
 				</div>
 
-				<div class="md:w-[60%] bg-white p-3 rounded-lg">
+				<div class="md:w-[60%] bg-secondary/50 p-3 rounded-lg">
 					<div v-if="product && product.data">
 						<p class="mb-2">{{ product.data.title }}</p>
 						<p class="font-light text-[12px] mb-2">
@@ -72,7 +72,7 @@
 					<div class="flex items-center justify-start gap-2 my-2">
 						<div class="text-xl font-bold">R$ {{ priceComputed }}</div>
 						<span
-							class="bg-[#F5F5F5] border text-[#C08562] text-[9px] font-semibold px-1.5 rounded-sm"
+							class="bg-secondary-foreground border text-secondary text-[9px] font-semibold px-1.5 rounded-sm"
 							>70% off</span
 						>
 					</div>
@@ -85,14 +85,10 @@
 
 					<div class="py-2" />
 
-					<button
-						@click="addToCart()"
-						:disabled="isInCart"
-						class="px-6 py-2 rounded-lg text-white text-lg font-semibold bg-gradient-to-r from-[#FF851A] to-[#FFAC2C]"
-					>
+					<Button @click="addToCart()" :disabled="isInCart">
 						<div v-if="isInCart">Is Added</div>
 						<div v-else>Add to Cart</div>
-					</button>
+					</Button>
 				</div>
 			</div>
 		</div>

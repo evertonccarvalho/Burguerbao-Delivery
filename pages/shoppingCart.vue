@@ -13,7 +13,7 @@
 					<div v-if="!user" class="flex text-center">
 						<NuxtLink
 							to="/auth"
-							class="bg-[#ff840b] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
+							class="bg-primary w-full text-foreground text-[21px] font-semibold p-1.5 rounded-full mt-4"
 						>
 							Sign in
 						</NuxtLink>
@@ -23,19 +23,13 @@
 
 			<div v-else class="md:flex gap-4 justify-between mx-auto w-full">
 				<div class="md:w-[65%]">
-					<div class="bg-white rounded-lg p-4">
+					<div class="bg-secondary/30 rounded-lg p-4">
 						<div class="text-2xl font-bold mb-2">
 							Carrinho de Compras ({{ userStore.cart.length }})
 						</div>
 					</div>
 
-					<div class="bg-[#FEEEEF] rounded-lg p-4 mt-4">
-						<div class="[#ff840b] font-bold">
-							Oferta de Boas-Vindas aplicável a apenas 1 item
-						</div>
-					</div>
-
-					<div id="Items" class="bg-white rounded-lg p-4 mt-4">
+					<div id="Items" class="bg-secondary/30 rounded-lg p-4 mt-4">
 						<div v-for="product in userStore.cart" :key="product.id">
 							<CartItem
 								:product="product"
@@ -49,7 +43,7 @@
 				<div class="md:hidden block my-4" />
 
 				<div class="md:w-[35%]">
-					<div id="Summary" class="bg-white rounded-lg p-4">
+					<div id="Summary" class="bg-secondary/30 rounded-lg p-4">
 						<div class="text-2xl font-extrabold mb-2">Resumo</div>
 						<div class="flex items-center justify-between my-4">
 							<div class="font-semibold">Total</div>
@@ -59,13 +53,16 @@
 						</div>
 						<button
 							@click="goToCheckout"
-							class="flex items-center justify-center bg-[#ff840b] w-full text-white text-[21px] font-semibold p-1.5 rounded-full mt-4"
+							class="flex items-center justify-center bg-primary w-full text-foreground text-[21px] font-semibold p-1.5 rounded-full mt-4"
 						>
 							Checkout
 						</button>
 					</div>
 
-					<div id="PaymentProtection" class="bg-white rounded-lg p-4 mt-4">
+					<div
+						id="PaymentProtection"
+						class="bg-secondary/30 rounded-lg p-4 mt-4"
+					>
 						<div class="text-lg font-semibold mb-2">Payment methods</div>
 						<div class="flex items-center justify-start gap-8 my-4">
 							<div v-for="card in cards" :key="card.id">

@@ -10,8 +10,8 @@
 					@click="isSelected = !isSelected"
 					class="flex items-center justify-center h-[20px] w-[20px] rounded-full border mr-5 ml-2"
 					:class="[
-						isHover ? 'border-[#ff840b]' : 'border-gray-300',
-						isSelected ? 'bg-[#ff840b]' : '',
+						isHover ? 'border-primary' : 'border-gray-300',
+						isSelected ? 'bg-primary' : '',
 					]"
 				>
 					<div class="h-[8px] w-[8px] rounded-full bg-white" />
@@ -25,14 +25,14 @@
 			<div class="flex items-center justify-between w-full">
 				<div class="flex items-center justify-between truncate">
 					<span
-						class="sm:block hidden bg-[#ff840b] text-white text-[9px] font-semibold px-1.5 rounded-sm min-w-[80px]"
+						class="sm:block hidden bg-primary text-foreground text-[9px] font-semibold px-1.5 rounded-sm min-w-[80px]"
 						>Oferta de Boas-Vindas
 					</span>
 					<div class="truncate sm:pl-2">{{ product.title }}</div>
 				</div>
 				<button
 					@click="removeFromCart()"
-					class="mx-3 sm:block hidden -mt-0.5 hover:[#ff840b]"
+					class="mx-3 sm:block hidden -mt-0.5 hover:primary"
 				>
 					<Icon name="material-symbols:delete-outline" size="20" />
 				</button>
@@ -51,7 +51,7 @@
 			<div class="flex items-center justify-end">
 				<button
 					@click="removeFromCart()"
-					class="sm:hidden block -mt-0.5 hover:[#ff840b]"
+					class="sm:hidden block -mt-0.5 hover:primary"
 				>
 					<Icon name="material-symbols:delete-outline" size="20" />
 				</button>

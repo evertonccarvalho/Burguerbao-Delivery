@@ -1,7 +1,7 @@
 <template>
 	<MainLayout>
 		<div id="AddressPage" class="mt-4 max-w-[500px] mx-auto px-2">
-			<div class="mx-auto bg-white rounded-lg p-3">
+			<div class="mx-auto bg-secondary/30 rounded-lg p-3">
 				<div class="text-xl text-bold mb-2">Detalhes do Endereço</div>
 				<form @submit.prevent="submit()">
 					<TextInput
@@ -44,14 +44,14 @@
 						:error="error && error.type == 'country' ? error.message : ''"
 					/>
 
-					<button
+					<Button
 						:disabled="isWorking"
 						type="submit"
-						class="mt-6 bg-gradient-to-r from-[#FE630C] to-[#FF3200] w-full text-white text-[21px] font-semibold p-1.5 rounded-full"
+						class="mt-4 bg-gradient-to-r from-[#FE630C] to-[#FF3200] w-full rounded-full"
 					>
 						<div v-if="!isWorking">Atualizar Endereço</div>
 						<Icon v-else name="eos-icons:loading" size="25" class="mr-2" />
-					</button>
+					</Button>
 				</form>
 			</div>
 		</div>

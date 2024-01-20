@@ -1,7 +1,7 @@
 <template>
-	<div id="AuthPage" class="w-full h-[100vh] bg-white">
+	<div id="AuthPage" class="w-full h-[100vh] bg-background">
 		<div
-			class="w-full flex items-center justify-center p-5 border-b border-b-gray-300"
+			class="w-full flex items-center justify-center p-5 border-b border-foreground"
 		>
 			<NuxtLink to="/" class="w-10">
 				<img src="/BurguerBao-logo.svg" />

@@ -17,7 +17,7 @@
 					/>
 					<router-link
 						to="/menu"
-						class="flex items-center max-w-[300px] justify-center bg-[#ff840b] hover:text-black hover:shadow-lg hover:drop-shadow-2xl transition-all duration-300 w-full text-[#43200e] text-[21px] font-semibold p-3 rounded-full mt-4"
+						class="flex items-center max-w-[300px] justify-center bg-primary hover:text-foreground hover:shadow-lg hover:drop-shadow-2xl transition-all duration-300 w-full text-[#43200e] text-[21px] font-semibold p-3 rounded-full mt-4"
 					>
 						Explore Nosso Cardápio
 					</router-link>

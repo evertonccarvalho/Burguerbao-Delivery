@@ -8,7 +8,9 @@
 					<HeaderLogo />
 				</div>
 			</div>
-			<div class="text-lg font-semibold text-white">Grupo da Hamburgueria</div>
+			<div class="text-lg font-semibold text-foreground">
+				Grupo da Hamburgueria
+			</div>
 			<div class="text-[#999999] text-sm">Éverton Carvalho</div>
 		</div>
 	</div>

@@ -1,5 +1,5 @@
 <template>
-	<div id="MainHeader" class="flex items-center w-full bg-black">
+	<div id="MainHeader" class="flex items-center w-full bg-card">
 		<div
 			class="flex lg:justify-start items-center justify-between gap-10 max-w-[1150px] w-full px-3 py-5 mx-auto"
 		>

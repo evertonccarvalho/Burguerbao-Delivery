@@ -1,16 +1,16 @@
 <template>
 	<MainLayout>
 		<HeroBanner />
-		<div id="IndexPage" class="mt-4 container mx-auto px-2">
+		<div id="IndexPage" class="mt-4 text-foreground container mx-auto px-2">
 			<!-- PRODUTOS EM DESTAQUE -->
 			<section
 				class="md:grid flex flex-col md:grid-cols-9 grid-cols-1 py-4 gap-4"
 			>
 				<!-- **** -->
 				<div
-					class="w-full md:col-span-2 max-h-[620px] px-4 rounded-md overflow-hidden bg-gray-200"
+					class="w-full md:col-span-2 max-h-[620px] px-4 rounded-xl overflow-hidden bg-secondary/30"
 				>
-					<h1 class="text-2xl p-2 w-full text-center bg font-bold">Destaque</h1>
+					<h1 class="text-2xl p-2 w-full text-center font-bold">Destaque</h1>
 
 					<div class="w-full h-full flex flex-col">
 						<div
@@ -26,7 +26,7 @@
 
 				<!-- **** -->
 				<div
-					class="w-full col-span-4 max-h-[620px] px-4 rounded-md overflow-hidden bg-gray-200"
+					class="w-full col-span-4 max-h-[620px] px-4 rounded-xl overflow-hidden bg-secondary/30"
 				>
 					<h1 class="text-2xl p-2 w-full text-center bg font-bold">
 						Mais Vendidos
@@ -53,11 +53,9 @@
 				</div>
 				<!-- **** -->
 				<div
-					class="w-full md:col-span-3 max-h-[620px] px-4 rounded-md overflow-hidden bg-yellow-200"
+					class="w-full md:col-span-3 max-h-[620px] px-4 rounded-xl overflow-hidden bg-secondary/30"
 				>
-					<h1 class="text-2xl p-2 w-full text-center bg font-bold">
-						Lançamentos
-					</h1>
+					<h1 class="text-2xl p-2 w-full text-center font-bold">Lançamentos</h1>
 
 					<div class="w-full h-full flex flex-col">
 						<div
@@ -74,9 +72,7 @@
 			</section>
 			<!-- CATEGORIAS -->
 			<section>
-				<h1 class="text-2xl p-2 w-full text-center bg font-bold">
-					Por Categoria
-				</h1>
+				<h1 class="text-2xl p-2 w-full text-center font-bold">Por Categoria</h1>
 				<div
 					v-if="categories"
 					class="flex justify-center gap-2 p-2 items-center"

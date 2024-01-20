@@ -5,7 +5,7 @@
 		<div class="overflow-hidden pl-2">
 			<div class="flex items-center">
 				<span
-					class="bg-[#ff840b] text-white text-[9px] font-semibold px-1.5 rounded-sm min-w-[80px]"
+					class="bg-primary text-foreground text-[9px] font-semibold px-1.5 rounded-sm min-w-[80px]"
 					>Oferta de Boas-Vindas</span
 				>
 				<div class="truncate pl-2">{{ product.title }}</div>

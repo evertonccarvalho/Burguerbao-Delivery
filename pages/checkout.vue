@@ -3,13 +3,13 @@
 		<div id="CheckoutPage" class="mt-4 max-w-[1200px] mx-auto px-2">
 			<div class="md:flex gap-4 justify-between mx-auto w-full">
 				<div class="md:w-[65%]">
-					<div class="bg-white rounded-lg p-4">
+					<div class="bg-secondary/30 rounded-lg p-4">
 						<div class="text-xl font-semibold mb-2">Endereço para envio</div>
 
 						<div v-if="currentAddress && currentAddress.data">
 							<NuxtLink
 								to="/address"
-								class="flex items-center pb-2 text-blue-500 hover:text-red-400"
+								class="flex items-center pb-2 text-blue-500 hover:text-primary"
 							>
 								<Icon name="mdi:plus" size="18" class="mr-2" />
 								Atualizar ERndereço
@@ -51,14 +51,14 @@
 						<NuxtLink
 							v-else
 							to="/address"
-							class="flex items-center text-blue-500 hover:text-red-400"
+							class="flex items-center text-blue-500 hover:text-primary"
 						>
 							<Icon name="mdi:plus" size="18" class="mr-2" />
 							Adicionar novo endereço
 						</NuxtLink>
 					</div>
 
-					<div id="Items" class="bg-white rounded-lg p-4 mt-4">
+					<div id="Items" class="bg-secondary/30 rounded-lg p-4 mt-4">
 						<div v-for="product in userStore.checkout" :key="product.id">
 							<CheckOutItem :product="product" />
 						</div>
@@ -67,7 +67,7 @@
 
 				<div class="md:hidden block my-4" />
 				<div class="md:w-[35%]">
-					<div id="PlaceOrder" class="bg-white rounded-lg p-4">
+					<div id="PlaceOrder" class="bg-secondary/30 rounded-lg p-4">
 						<div class="text-2xl font-extrabold mb-2">Summary</div>
 
 						<div class="flex items-center justify-between my-4">
@@ -99,7 +99,7 @@
 							<button
 								:disabled="isProcessing"
 								type="submit"
-								class="mt-4 bg-gradient-to-r from-[#FE630C] to-[#FF3200] w-full text-white text-[21px] font-semibold p-1.5 rounded-full"
+								class="mt-4 bg-gradient-to-r from-[#FE630C] to-[#FF3200] w-full text-foreground text-[21px] font-semibold p-1.5 rounded-full"
 								:class="isProcessing ? 'opacity-70' : 'opacity-100'"
 							>
 								<Icon v-if="isProcessing" name="eos-icons:loading" />
@@ -108,7 +108,7 @@
 						</form>
 					</div>
 
-					<div class="bg-white rounded-lg p-4 mt-4">
+					<div class="bg-secondary/30 rounded-lg p-4 mt-4">
 						<div class="text-lg font-semibold mb-2 mt-2">BurguerBão</div>
 						<p class="my-2">
 							BurguerBão mantém suas informações e pagamento seguros

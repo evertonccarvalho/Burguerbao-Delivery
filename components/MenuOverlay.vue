@@ -34,7 +34,7 @@
 						<span class="pl-4">Carrinho</span>
 					</div>
 					<div
-						class="flex items-center justify-center bg-[#ff840b] h-[35px] min-w-[35px] text-lg text-white rounded-full"
+						class="flex items-center justify-center bg-primary h-[35px] min-w-[35px] text-lg text-foreground rounded-full"
 					>
 						{{ userStore.cart.length }}
 					</div>

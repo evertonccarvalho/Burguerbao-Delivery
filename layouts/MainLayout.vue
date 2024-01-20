@@ -1,7 +1,7 @@
 <template>
 	<div
 		id="MainLayout"
-		class="w-screen flex bg-black items-center flex-col z-50"
+		class="w-screen flex bg-background items-center flex-col z-50"
 	>
 		<MainHeader />
 		<TopMenu />

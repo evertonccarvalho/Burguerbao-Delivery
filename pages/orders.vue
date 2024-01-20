@@ -1,7 +1,7 @@
 <template>
 	<MainLayout>
 		<div id="OrdersPage" class="mt-4 max-w-[1200px] mx-auto px-2 min-h-[50vh]">
-			<div class="bg-white w-full p-6 min-h-[150px]">
+			<div class="bg-secondary/30 w-full p-6 min-h-[150px]">
 				<div class="flex items-center text-xl">
 					<Icon name="carbon:delivery" color="#5FCB04" size="35" />
 					<span class="pl-4">Pedidos</span>

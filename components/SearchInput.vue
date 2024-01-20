@@ -2,7 +2,7 @@
 	<div class="w-full md:block">
 		<div class="relative">
 			<div
-				class="flex items-center p-0 m-0 border-none bg-white rounded-full w-full"
+				class="flex items-center p-0 m-0 border-none bg-foreground rounded-full w-full"
 			>
 				<input
 					class="w-full h-full bg-transparent text-black placeholder-gray-400 text-sm pl-3 focus:outline-none"
@@ -17,9 +17,9 @@
 					class="mr-2"
 				/>
 				<button
-					class="flex items-center w-14 h-8 p-1.5 px-4 m-1 rounded-full bg-black"
+					class="flex items-center w-14 h-8 p-1.5 b px-4 m-1 rounded-full bg-card"
 				>
-					<Icon name="ph:magnifying-glass" size="20" color="#ffffff" />
+					<Icon name="ph:magnifying-glass" size="20" />
 				</button>
 			</div>
 

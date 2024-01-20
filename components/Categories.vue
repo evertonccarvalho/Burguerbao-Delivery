@@ -2,7 +2,7 @@
 	<section class="flex flex-col" id="Categories">
 		<div
 			:id="`ComponenteProduto${category.id}`"
-			class="flex flex-col rounded-full bg-category-item-gradient h-32 w-32 items-center justify-center cursor-pointer shrink-0 overflow-hidden hover:bg-slate-200"
+			class="flex flex-col bg-card-foreground rounded-full bg-category-item-gradient h-32 w-32 items-center justify-center cursor-pointer shrink-0 overflow-hidden hover:bg-slate-200"
 		>
 			<div class="flex h-20 w-full items-center justify-center rounded-md">
 				<img

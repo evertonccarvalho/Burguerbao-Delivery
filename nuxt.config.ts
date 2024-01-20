@@ -7,7 +7,20 @@ export default defineNuxtConfig({
 		'@pinia-plugin-persistedstate/nuxt',
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/supabase',
+		'shadcn-nuxt',
 	],
+	shadcn: {
+		/**
+		 * Prefix for all the imported component
+		 */
+		prefix: '',
+		/**
+		 * Directory that the component lives in.
+		 * @default "./components/ui"
+		 */
+		componentDir: './components/ui',
+	},
+	css: ['~/main.css'],
 	ssr: false,
 	supabase: {
 		redirect: false,

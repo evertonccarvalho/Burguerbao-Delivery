@@ -6,7 +6,7 @@
 			@mouseleave="isCartHover = false"
 		>
 			<span
-				class="absolute flex items-center justify-center -right-[3px] top-0 bg-white h-[17px] min-w-[17px] text-xs text-black px-0.5 rounded-full"
+				class="absolute flex items-center justify-center -right-[3px] top-0 bg-red-600 h-[17px] min-w-[17px] text-xs text-foreground px-0.5 rounded-full"
 			>
 				{{ userStore.cart.length }}
 			</span>
