@@ -1,55 +1,46 @@
 <template>
-	<div
-		@mouseenter="isAccountMenu = true"
-		@mouseleave="isAccountMenu = false"
-		class="relative text-foreground gap-2 flex items-center justify-end rounded-full hover:text-foreground h-full cursor-pointer"
-		:class="
-			isAccountMenu
-				? 'bg-transparen  z-40 shadow-[0_15px_100px_40px_rgba(0,0,0,0.3)]'
-				: ''
-		"
-	>
-		<Icon name="mdi:account" size="33" />
-
-		<div
-			id="AccountMenu"
-			v-if="isAccountMenu"
-			class="absolute w-[220px] text-foreground border border-primary z-40 bg-card p-2 top-[10px]"
-		>
-			<div v-if="!user">
-				<div class="text-semibold text-[15px] my-4 px-3">
-					Bem Vindo ao BurguerBão
-				</div>
-				<div class="flex items-center gap-1 px-3 mb-3">
-					<NuxtLink
-						to="/auth"
-						class="bg-primary text-center w-full text-[16px] rounded-lg text-foreground font-semibold p-2"
-					>
-						Login / Register
-					</NuxtLink>
-				</div>
+	<DropdownMenu>
+		<DropdownMenuTrigger class="relative">
+			<div
+				class="relative flex flex-col md:flex-row gap-1 items-center justify-center hover:text-primary capitalize text-sm transition-all duration-300"
+			>
+				<Icon name="mdi:account" size="33" />
+				Conta
 			</div>
-			<ul class="bg-card rounded-lg">
-				<li
-					@click="navigateTo('/orders')"
-					class="text-[13px] py-2 px-4 w-full rounded-lg hover:bg-muted"
+		</DropdownMenuTrigger>
+		<DropdownMenuContent v-if="!user">
+			<DropdownMenuLabel>Bem Vindo ao BurguerBão</DropdownMenuLabel>
+
+			<DropdownMenuItem>
+				<NuxtLink
+					to="/auth"
+					class="bg-primary text-center w-full text-[16px] rounded-lg text-foreground font-semibold p-2"
 				>
-					Meus Pedidos
-				</li>
-				<li
-					v-if="user"
-					@click="client.auth.signOut()"
-					class="text-[13px] py-2 px-4 w-full rounded-lg hover:bg-muted"
-				>
-					Sair
-				</li>
-			</ul>
-		</div>
-	</div>
+					Login / Register
+				</NuxtLink>
+			</DropdownMenuItem>
+		</DropdownMenuContent>
+		<DropdownMenuContent>
+			<DropdownMenuItem @click="navigateTo('/orders')"
+				>Meus Pedidos</DropdownMenuItem
+			>
+			<DropdownMenuItem v-if="user" @click="client.auth.signOut()"
+				>Sair</DropdownMenuItem
+			>
+		</DropdownMenuContent>
+	</DropdownMenu>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const client = useSupabaseClient();
 const user = useSupabaseUser();
-let isAccountMenu = ref(false);
+
+import {
+	DropdownMenu,
+	DropdownMenuContent,
+	DropdownMenuItem,
+	DropdownMenuLabel,
+	DropdownMenuSeparator,
+	DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 </script>
