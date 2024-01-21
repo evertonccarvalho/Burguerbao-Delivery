@@ -1,7 +1,7 @@
 <template>
 	<MainLayout>
 		<div
-			id="favoritesPage"
+			id="FavoritesPage"
 			class="mt-4 container w-full flex p-4 h-screen mx-auto px-2"
 		>
 			<div class="bg-card/30 w-full p-6 min-h-[150px]">
@@ -16,27 +16,22 @@
 						:key="favorite.id"
 						class="text-sm pl-[50px]"
 					>
-						<div class="bfavorite-b py-1">
-							<div class="pt-2"></div>
-
-							<div v-for="item in favorite.favoriteItem" :key="item.id">
-								<NuxtLink
-									class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
-									:to="`/item/${item.productId}`"
+						<div class="border-b py-1">
+							<NuxtLink
+								class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
+								:to="`/item/${favorite.productId}`"
+							>
+								<div
+									class="flex h-[40px] w-[40px] items-center justify-center rounded-xl bg-card"
 								>
-									<div
-										class="flex h-[40px] w-[40px] items-center justify-center rounded-xl bg-card"
-									>
-										<img
-											class="rounded-md h-auto max-h-[80%]"
-											sizes="100vw"
-											:src="item.product.imageUrls"
-										/>
-									</div>
-									{{ item.product.title }}
-								</NuxtLink>
-							</div>
-							<p>FavoriteID: {{ favorite.productId }}</p>
+									<img
+										class="rounded-md h-auto max-h-[80%]"
+										sizes="100vw"
+										:src="favorite.product.imageUrls"
+									/>
+								</div>
+								{{ favorite.product.title }}
+							</NuxtLink>
 						</div>
 					</div>
 				</div>

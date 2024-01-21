@@ -6,6 +6,9 @@ export default defineEventHandler(async (event) => {
 		let favorites = await prisma.favorites.findMany({
 			where: { userId: event.context.params.userId },
 			orderBy: { id: 'desc' },
+			include: {
+				product: true,
+			},
 		});
 
 		console.log('Fetched favorites:', favorites);

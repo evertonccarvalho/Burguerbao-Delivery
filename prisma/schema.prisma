@@ -23,6 +23,7 @@ model Favorites {
   userId     String    @db.Uuid
   productId  Int
   created_at DateTime? @default(now()) @db.Timestamptz(6)
+  product    Products  @relation(fields: [productId], references: [id])
 
   @@index([userId, productId], name: "user_product_index")
 }
@@ -68,6 +69,7 @@ model Products {
   category           Category    @relation(fields: [categoryId], references: [id])
   orderItem          OrderItem[]
   created_at         DateTime?   @default(now()) @db.Timestamptz(6)
+  Favorites          Favorites[]
 }
 
 model Extras {

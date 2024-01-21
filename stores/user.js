@@ -1,4 +1,4 @@
-// stores/counter.js
+// stores/user.js
 import { defineStore } from 'pinia';
 
 export const useUserStore = defineStore('user', {
@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user', {
 		isLoading: false,
 		cart: [],
 		checkout: [],
-		favorites: [], // New property to store liked items
+		favorites: [], // Initialize favorites as an empty array
 	}),
 	persist: true,
 });

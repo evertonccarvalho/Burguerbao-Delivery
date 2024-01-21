@@ -30,11 +30,11 @@
 					<div
 						@click="toggleFavorite"
 						:class="
-							favorites ? 'bg-red-500 rounded-full p-0.5 flex' : 'p-0.5 flex'
+							isFavorite ? 'bg-red-500 rounded-full p-0.5 flex' : 'p-0.5 flex'
 						"
 					>
 						<Icon
-							:name="favorites ? 'mdi:heart' : 'mdi:heart-outline'"
+							:name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'"
 							size="20"
 						/>
 					</div>
@@ -59,36 +59,21 @@ const { product } = toRefs(props);
 const userStore = useUserStore();
 const user = useSupabaseUser();
 
-let favorites = ref(null);
-
-onBeforeMount(async () => {
-	try {
-		favorites.data = await useFetch(
-			`/api/prisma/get-all-favorites-by-user/${user.value.id}`
-		);
-	} catch (error) {
-		console.error('Erro ao buscar favoritos:', error);
-		// Trate o erro, como exibir uma mensagem ao usuário
-	}
-});
-
 const toggleFavorite = async () => {
 	try {
 		await useFetch('/api/prisma/add-favorite', {
 			method: 'POST',
 			body: {
 				userId: user.value.id,
-				productId: product.value.id,
+				productId: product.id,
 			},
 		});
 
-		// Atualize a lista de favoritos localmente após adicionar com sucesso
-		favorites.data = await useFetch(
-			`/api/prisma/get-all-favorites-by-user/${user.value.id}`
-		);
+		// Update the favorites locally after successfully adding
+		userStore.toggleFavorite(product.id);
 	} catch (error) {
-		console.error('Erro ao adicionar favorito:', error);
-		// Trate o erro, como exibir uma mensagem ao usuário
+		console.error('Error adding favorite:', error);
+		// Handle the error, such as displaying a message to the user
 	}
 };
 
