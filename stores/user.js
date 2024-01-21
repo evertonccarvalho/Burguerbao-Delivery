@@ -7,6 +7,7 @@ export const useUserStore = defineStore('user', {
 		isLoading: false,
 		cart: [],
 		checkout: [],
+		favorites: [], // New property to store liked items
 	}),
 	persist: true,
 });

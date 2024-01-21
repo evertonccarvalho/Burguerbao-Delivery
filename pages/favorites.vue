@@ -1,0 +1,73 @@
+<template>
+	<MainLayout>
+		<div
+			id="favoritesPage"
+			class="mt-4 container w-full flex p-4 h-screen mx-auto px-2"
+		>
+			<div class="bg-card/30 w-full p-6 min-h-[150px]">
+				<div class="flex items-center text-xl">
+					<Icon name="carbon:delivery" color="#5FCB04" size="35" />
+					<span class="pl-4">Favoritos</span>
+				</div>
+
+				<div v-if="favorites && favorites.data">
+					<div
+						v-for="favorite in favorites.data"
+						:key="favorite.id"
+						class="text-sm pl-[50px]"
+					>
+						<div class="bfavorite-b py-1">
+							<div class="pt-2"></div>
+
+							<div v-for="item in favorite.favoriteItem" :key="item.id">
+								<NuxtLink
+									class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
+									:to="`/item/${item.productId}`"
+								>
+									<div
+										class="flex h-[40px] w-[40px] items-center justify-center rounded-xl bg-card"
+									>
+										<img
+											class="rounded-md h-auto max-h-[80%]"
+											sizes="100vw"
+											:src="item.product.imageUrls"
+										/>
+									</div>
+									{{ item.product.title }}
+								</NuxtLink>
+							</div>
+							<p>FavoriteID: {{ favorite.productId }}</p>
+						</div>
+					</div>
+				</div>
+
+				<div v-else class="flex items-center justify-center">
+					Você não possui favoritos.
+				</div>
+			</div>
+		</div>
+	</MainLayout>
+</template>
+
+<script setup>
+import MainLayout from '~/layouts/MainLayout.vue';
+import { useUserStore } from '~/stores/user';
+const userStore = useUserStore();
+const user = useSupabaseUser();
+
+let favorites = ref(null);
+
+onBeforeMount(async () => {
+	favorites.value = await useFetch(
+		`/api/prisma/get-all-favorites-by-user/${user.value.id}`
+	);
+});
+
+onMounted(() => {
+	if (!user.value) {
+		return navigateTo('/auth');
+	}
+
+	setTimeout(() => (userStore.isLoading = false), 200);
+});
+</script>

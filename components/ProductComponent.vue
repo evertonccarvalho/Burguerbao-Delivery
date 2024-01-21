@@ -16,68 +16,89 @@
 						/>
 					</div>
 				</div>
-
-				<div id="DetalhesProduto" class="flex flex-col py-4 px-5">
-					<span class="flex items-center justify-start gap-2 px-1">
-						<span class="text-primary font-semibold"
-							>R$ {{ priceComputed }}</span
-						>
-						<span
-							class="text-secondary-foreground text-sm text-light line-through"
-							>R$ {{ oldPriceComputed }}</span
-						>
-					</span>
-
-					<span class="px-1 relative text-primary text-xs font-semibold">
-						Extra {{ discountPercentage }}% de desconto
-					</span>
-
-					<!-- <div class="flex items-center gap-1 px-1 relative -top-1">
-						<span
-							class="bg-primary text-foreground text-[9px] font-semibold px-1.5 rounded-sm"
-							>Oferta de Boas-Vindas</span
-						>
-						<span
-							class="bg-[#F5F5F5] border text-[#C08562] text-[9px] font-semibold px-1.5 rounded-sm"
-							>Mais Vendido</span
-						>
-					</div> -->
-
-					<!-- <p class="flex items-center px-1 pt-0.5 text-xs text-[#252525]">
-						5.000+ vendidos
-						<Icon
-							name="material-symbols:star-rate"
-							color="#757575"
-							class="ml-1.5"
-						/>
-						4.7
-					</p> -->
-
-					<p class="px-1 pt-0.5 text-xs text-secondary-foreground">
-						{{ product.title.substring(0, 60) }}
-					</p>
-
-					<!-- <p class="px-1 pb-1">
-						<span class="text-[#009A66] text-xs font-semibold"
-							>Frete Grátis</span
-						>
-					</p> -->
-				</div>
 			</NuxtLink>
+
+			<div id="DetalhesProduto" class="flex flex-col py-4 px-5">
+				<span class="flex items-center justify-start gap-2 px-1">
+					<span class="text-primary font-semibold"
+						>R$ {{ oldPriceComputed }}
+					</span>
+					<span
+						class="text-secondary-foreground text-xs text-light line-through"
+						>R$ {{ priceComputed }}
+					</span>
+					<div
+						@click="toggleFavorite"
+						:class="
+							favorites ? 'bg-red-500 rounded-full p-0.5 flex' : 'p-0.5 flex'
+						"
+					>
+						<Icon
+							:name="favorites ? 'mdi:heart' : 'mdi:heart-outline'"
+							size="20"
+						/>
+					</div>
+				</span>
+				<span class="px-1 relative text-primary text-xs font-semibold">
+					Extra {{ discountPercentage }}% de desconto
+				</span>
+
+				<p class="px-1 pt-0.5 text-xs text-secondary-foreground">
+					{{ product.title.substring(0, 60) }}
+				</p>
+			</div>
 		</div>
 	</div>
 </template>
 
 <script setup>
+import { useUserStore } from '~/stores/user';
 const props = defineProps(['product']);
 const { product } = toRefs(props);
+
+const userStore = useUserStore();
+const user = useSupabaseUser();
+
+let favorites = ref(null);
+
+onBeforeMount(async () => {
+	try {
+		favorites.data = await useFetch(
+			`/api/prisma/get-all-favorites-by-user/${user.value.id}`
+		);
+	} catch (error) {
+		console.error('Erro ao buscar favoritos:', error);
+		// Trate o erro, como exibir uma mensagem ao usuário
+	}
+});
+
+const toggleFavorite = async () => {
+	try {
+		await useFetch('/api/prisma/add-favorite', {
+			method: 'POST',
+			body: {
+				userId: user.value.id,
+				productId: product.value.id,
+			},
+		});
+
+		// Atualize a lista de favoritos localmente após adicionar com sucesso
+		favorites.data = await useFetch(
+			`/api/prisma/get-all-favorites-by-user/${user.value.id}`
+		);
+	} catch (error) {
+		console.error('Erro ao adicionar favorito:', error);
+		// Trate o erro, como exibir uma mensagem ao usuário
+	}
+};
 
 const priceComputed = computed(() => {
 	return (product.value.price / 100).toFixed(2);
 });
+
 const discountPercentage = product.value.discountPercentage || 0;
+
 const oldPriceComputed = computed(() => {
-	const discountPercentage = product.value.discountPercentage || 0; // Se discountPercentage não estiver definido, assume 0%
 	const discountedPrice =
 		product.value.price - (product.value.price * discountPercentage) / 100;
 	return (discountedPrice / 100).toFixed(2);
