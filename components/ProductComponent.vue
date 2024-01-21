@@ -29,9 +29,11 @@
 					</span>
 					<div
 						@click="toggleFavorite"
-						:class="
-							isFavorite ? 'bg-red-500 rounded-full p-0.5 flex' : 'p-0.5 flex'
-						"
+						:class="{
+							'bg-red-500 rounded-full p-0.5 flex': isFavorite,
+							'p-0.5 flex': !isFavorite,
+							'transition-colors duration-300': true, // Adiciona uma transição de cores
+						}"
 					>
 						<Icon
 							:name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'"
@@ -53,11 +55,38 @@
 
 <script setup>
 import { useUserStore } from '~/stores/user';
+import { computed, onMounted, ref, toRefs } from 'vue';
+
 const props = defineProps(['product']);
 const { product } = toRefs(props);
 
 const userStore = useUserStore();
 const user = useSupabaseUser();
+// const favorites = computed(() => userStore.favorites || []); // Certifique-se de que favorites seja uma matriz
+
+const isFavorite = computed(() => {
+	return userStore.favorites.includes(product.value.id);
+});
+
+onMounted(async () => {
+	try {
+		// Faça uma chamada para obter os favoritos do usuário do seu backend
+		const response = await useFetch(
+			`/api/prisma/get-all-favorites-by-user/${user.value.id}`,
+			{
+				method: 'GET',
+			}
+		);
+
+		// Atualize a lista de favoritos localmente
+		if (response && response.favorites) {
+			userStore.setFavorites(response.favorites);
+		}
+	} catch (error) {
+		console.error('Error fetching favorites:', error);
+		// Lide com o erro, como exibir uma mensagem para o usuário
+	}
+});
 
 const toggleFavorite = async () => {
 	try {
@@ -65,15 +94,33 @@ const toggleFavorite = async () => {
 			method: 'POST',
 			body: {
 				userId: user.value.id,
-				productId: product.id,
+				productId: product.value.id,
 			},
 		});
 
-		// Update the favorites locally after successfully adding
-		userStore.toggleFavorite(product.id);
+		// Certifique-se de que this.favorites é uma matriz
+		if (!Array.isArray(userStore.favorites)) {
+			userStore.favorites = [];
+		}
+
+		// Verifique se o produto já está nos favoritos usando includes
+		const isAlreadyFavorite = userStore.favorites.includes(product.value.id);
+
+		if (isAlreadyFavorite) {
+			// Se já estiver nos favoritos, remova-o
+			userStore.favorites = userStore.favorites.filter(
+				(id) => id !== product.value.id
+			);
+		} else {
+			// Se não estiver nos favoritos, adicione-o
+			userStore.favorites.push(product.value.id);
+		}
+
+		console.log('Product toggled in favorites:', product.value.id);
+		console.log('Updated userStore.favorites:', userStore.favorites);
 	} catch (error) {
-		console.error('Error adding favorite:', error);
-		// Handle the error, such as displaying a message to the user
+		console.error('Error toggling favorite:', error);
+		// Lide com o erro, como exibir uma mensagem para o usuário
 	}
 };
 

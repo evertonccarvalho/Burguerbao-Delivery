@@ -8,6 +8,26 @@ export const useUserStore = defineStore('user', {
 		cart: [],
 		checkout: [],
 		favorites: [], // Initialize favorites as an empty array
+		isFavorite: false, // Add isFavorite to the state
 	}),
+
+	actions: {
+		toggleFavorite(productId) {
+			const index = this.favorites.indexOf(productId);
+
+			if (index === -1) {
+				// Adiciona o produto aos favoritos se ainda não estiver lá
+				this.favorites.push(productId);
+			} else {
+				// Remove o produto dos favoritos se já estiver lá
+				this.favorites.splice(index, 1);
+			}
+		},
+		setFavorites(favorites) {
+			// Define a lista completa de favoritos
+			this.favorites = favorites;
+		},
+	},
+
 	persist: true,
 });

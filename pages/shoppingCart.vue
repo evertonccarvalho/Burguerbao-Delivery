@@ -107,7 +107,6 @@ const totalPriceComputed = computed(() => {
 
 	if (userStore.cart) {
 		userStore.cart.forEach((prod) => {
-			console.log('Product:', prod);
 			price += prod.price;
 		});
 	}
