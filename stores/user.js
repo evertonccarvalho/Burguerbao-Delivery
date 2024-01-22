@@ -31,6 +31,12 @@ export const useUserStore = defineStore('user', {
 		selectCategory(categoryId) {
 			this.selectedCategory = categoryId;
 		},
+		clearUser() {
+			// Clear user-related information when the user logs out
+			this.favorites = [];
+			this.isFavorite = false;
+			// ... other properties to clear
+		},
 	},
 
 	persist: true,

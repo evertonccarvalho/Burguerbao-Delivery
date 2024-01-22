@@ -83,9 +83,9 @@ onBeforeMount(async () => {
 	setTimeout(() => (userStore.isLoading = false), 1000);
 });
 
-let categories = ref(null);
-onBeforeMount(async () => {
-	categories.value = await useFetch('/api/prisma/get-all-categories');
-	setTimeout(() => (userStore.isLoading = false), 1000);
-});
+// let categories = ref(null);
+// onBeforeMount(async () => {
+// 	categories.value = await useFetch('/api/prisma/get-all-categories');
+// 	setTimeout(() => (userStore.isLoading = false), 1000);
+// });
 </script>

@@ -68,22 +68,23 @@ const isFavorite = computed(() => {
 });
 
 onMounted(async () => {
-	try {
-		// Faça uma chamada para obter os favoritos do usuário do seu backend
-		const response = await useFetch(
-			`/api/prisma/get-all-favorites-by-user/${user.value.id}`,
-			{
-				method: 'GET',
-			}
-		);
+	if (user.value) {
+		try {
+			// Only make the API call if the user is authenticated
+			const response = await useFetch(
+				`/api/prisma/get-all-favorites-by-user/${user.value.id}`,
+				{
+					method: 'GET',
+				}
+			);
 
-		// Atualize a lista de favoritos localmente
-		if (response && response.favorites) {
-			userStore.setFavorites(response.favorites);
+			if (response && response.favorites) {
+				userStore.setFavorites(response.favorites);
+			}
+		} catch (error) {
+			console.error('Error fetching favorites:', error);
+			// Handle the error, such as displaying a message to the user
 		}
-	} catch (error) {
-		console.error('Error fetching favorites:', error);
-		// Lide com o erro, como exibir uma mensagem para o usuário
 	}
 });
 

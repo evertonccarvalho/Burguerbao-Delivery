@@ -53,13 +53,17 @@ const user = useSupabaseUser();
 let favorites = ref(null);
 
 onBeforeMount(async () => {
-	favorites.value = await useFetch(
-		`/api/prisma/get-all-favorites-by-user/${user.value.id}`
-	);
+	if (user.value) {
+		// Somente busca os favoritos se houver um usuário logado
+		favorites.value = await useFetch(
+			`/api/prisma/get-all-favorites-by-user/${user.value.id}`
+		);
+	}
 });
 
 onMounted(() => {
 	if (!user.value) {
+		// Se não houver usuário, redireciona para a página de autenticação
 		return navigateTo('/auth');
 	}
 

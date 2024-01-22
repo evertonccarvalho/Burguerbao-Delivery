@@ -24,23 +24,33 @@
 			<DropdownMenuItem @click="navigateTo('/orders')"
 				>Meus Pedidos</DropdownMenuItem
 			>
-			<DropdownMenuItem v-if="user" @click="client.auth.signOut()"
-				>Sair</DropdownMenuItem
-			>
+			<DropdownMenuItem @click="handleLogout">Sair</DropdownMenuItem>
 		</DropdownMenuContent>
 	</DropdownMenu>
 </template>
 
 <script setup lang="ts">
-const client = useSupabaseClient();
-const user = useSupabaseUser();
-
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+const client = useSupabaseClient();
+const user = useSupabaseUser();
+import { useUserStore } from '~/stores/user';
+const userStore = useUserStore();
+
+const handleLogout = async () => {
+	try {
+		await client.auth.signOut();
+
+		// Clear the userStore when the user logs out
+		userStore.clearUser(); // Assuming there's a method in your user store to clear user information
+	} catch (error) {
+		console.error('Error during logout:', error);
+		// Handle the error, such as displaying a message to the user
+	}
+};
 </script>
