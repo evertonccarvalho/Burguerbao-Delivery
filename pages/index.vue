@@ -65,7 +65,7 @@
 				<!-- **** -->
 			</section>
 			<!-- CATEGORIAS -->
-			<section>
+			<section id="MENUSECTION">
 				<h1 class="text-2xl p-2 w-full text-center font-bold">Por Categoria</h1>
 				<div
 					v-if="categories"
