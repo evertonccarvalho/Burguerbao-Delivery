@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="w-full h-screen flex items-center relative bg-no-repeat bg-cover flex-col z-50 overflow-scroll"
+		class="w-full h-screen flex items-center relative bg-no-repeat bg-cover flex-col z-50"
 		style="background-image: url('/BG.jpg')"
 	>
 		<div class="w-full h-screen flex items-center flex-col">

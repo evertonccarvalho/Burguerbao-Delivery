@@ -1,8 +1,8 @@
 <template>
 	<div class="z-[-1] w-full h-full">
-		<NuxtLayout>
-			<NuxtPage />
-		</NuxtLayout>
+		<!-- <NuxtLayout> -->
+		<NuxtPage />
+		<!-- </NuxtLayout> -->
 		<MenuOverlay
 			:class="[
 				{
