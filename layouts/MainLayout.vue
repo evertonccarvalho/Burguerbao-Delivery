@@ -1,17 +1,18 @@
 <template>
 	<div
-		id="MainLayout"
-		class="w-fullh h-screen flex bg-black items-center flex-col z-50"
+		class="w-full h-screen flex items-center relative bg-no-repeat bg-cover flex-col z-50 overflow-scroll"
 		style="background-image: url('/BG.jpg')"
 	>
-		<Header />
-		<div class="pb-20" />
-		<!-- <MainHeader /> -->
-		<!-- <TopMenu /> -->
-		<Loading v-if="userStore.isLoading" />
+		<div class="w-full h-screen flex items-center flex-col">
+			<Header />
+			<div class="pb-20" />
+			<!-- Conteúdo principal da sua landing page aqui -->
+			<Loading v-if="userStore.isLoading" />
+			<slot />
+			<div class="pb-20" />
 
-		<slot />
-		<Footer v-if="!userStore.isLoading" />
+			<Footer v-if="!userStore.isLoading" />
+		</div>
 	</div>
 </template>
 

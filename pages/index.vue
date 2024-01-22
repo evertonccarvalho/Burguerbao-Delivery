@@ -65,30 +65,8 @@
 				<!-- **** -->
 			</section>
 			<!-- CATEGORIAS -->
-			<section id="MENUSECTION">
-				<h1 class="text-2xl p-2 w-full text-center font-bold">Por Categoria</h1>
-				<div
-					v-if="categories"
-					class="flex justify-start md:justify-center md:flex-row overflow-x-auto gap-2"
-				>
-					<div v-for="category in categories.data" :key="category.id">
-						<Categories :category="category" />
-					</div>
-				</div>
-			</section>
-			<!-- CATEGORIAS -->
-			<!-- PRODUTOS -->
-			<section>
-				<h1 class="text-2xl p-2 w-full text-center bg font-bold">Produtos</h1>
-				<div
-					v-if="products"
-					class="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4"
-				>
-					<div v-for="product in products.data" :key="product.id">
-						<ProductComponent :product="product" />
-					</div>
-				</div>
-			</section>
+			<CategoriesList />
+			<ProductList />
 			<!-- PRODUTOS -->
 		</div>
 	</MainLayout>
