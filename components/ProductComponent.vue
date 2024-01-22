@@ -62,7 +62,6 @@ const { product } = toRefs(props);
 
 const userStore = useUserStore();
 const user = useSupabaseUser();
-// const favorites = computed(() => userStore.favorites || []); // Certifique-se de que favorites seja uma matriz
 
 const isFavorite = computed(() => {
 	return userStore.favorites.includes(product.value.id);
@@ -115,9 +114,6 @@ const toggleFavorite = async () => {
 			// Se não estiver nos favoritos, adicione-o
 			userStore.favorites.push(product.value.id);
 		}
-
-		console.log('Product toggled in favorites:', product.value.id);
-		console.log('Updated userStore.favorites:', userStore.favorites);
 	} catch (error) {
 		console.error('Error toggling favorite:', error);
 		// Lide com o erro, como exibir uma mensagem para o usuário

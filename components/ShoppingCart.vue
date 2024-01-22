@@ -1,6 +1,7 @@
 <template>
 	<NuxtLink to="/shoppingcart" class="flex gap-2 flex-row items-center">
 		<button
+			:class="{ 'text-primary': $route.path === '/shoppingcart' }"
 			class="relative flex flex-col md:flex-row gap-1 items-center justify-center hover:text-primary capitalize text-sm transition-all duration-300"
 			@mouseenter="isCartHover = true"
 			@mouseleave="isCartHover = false"

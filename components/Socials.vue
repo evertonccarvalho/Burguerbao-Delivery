@@ -8,7 +8,7 @@
 			:key="index"
 			target="_blank"
 			:to="link.path"
-			:class="{ 'text-accent': link.path === currentPath }"
+			:class="{ 'text-primary': $route.path === link.path }"
 			class="relative flex flex-col md:flex-row gap-1 items-center justify-center hover:text-primary capitalize text-sm transition-all duration-300"
 		>
 			<Icon :name="link.icon" size="30" />

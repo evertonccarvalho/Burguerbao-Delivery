@@ -20,7 +20,7 @@
 				</NuxtLink>
 			</DropdownMenuItem>
 		</DropdownMenuContent>
-		<DropdownMenuContent>
+		<DropdownMenuContent v-if="user">
 			<DropdownMenuItem @click="navigateTo('/orders')"
 				>Meus Pedidos</DropdownMenuItem
 			>
