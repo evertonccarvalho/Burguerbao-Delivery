@@ -1,4 +1,5 @@
 // stores/productStore.js
+import type { Favorites } from '@prisma/client';
 import { defineStore } from 'pinia';
 import type { Category } from '~/server/api/prisma/get-all-categories';
 import type { Products } from '~/server/api/prisma/get-all-products';
@@ -7,6 +8,7 @@ export const useProductStore = defineStore('productStore', {
 	state: () => ({
 		products: [] as Products[],
 		categories: [] as Category[],
+		favorites: [] as Favorites[],
 	}),
 
 	actions: {
@@ -35,6 +37,22 @@ export const useProductStore = defineStore('productStore', {
 				console.error('Erro ao carregar categorias:', error);
 			}
 		},
+
+		// async fetchFavorite() {
+		// 	const user = useSupabaseUser();
+
+		// 	try {
+		// 		const userId = user.value?.id;
+		// 		const { data: favorites } = await useFetch(
+		// 			`/api/prisma/get-all-favorites-by-user/${userId}`
+		// 		);
+		// 		if (favorites.value) {
+		// 			this.favorites = favorites.value as Favorites[];
+		// 		}
+		// 	} catch (error) {
+		// 		console.error('Error loading favorites:', error);
+		// 	}
+		// },
 	},
 
 	persist: true,
