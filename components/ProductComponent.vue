@@ -27,19 +27,8 @@
 						class="text-secondary-foreground text-xs text-light line-through"
 						>R$ {{ priceComputed }}
 					</span>
-					<div
-						@click="toggleFavorite"
-						:class="{
-							'bg-red-500 rounded-full p-0.5 flex': isFavorite,
-							'p-0.5 flex': !isFavorite,
-							'transition-colors duration-300': true, // Adiciona uma transição de cores
-						}"
-					>
-						<Icon
-							:name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'"
-							size="20"
-						/>
-					</div>
+
+					<FavoriteButton :productId="product.id" :userId="user.id" />
 				</span>
 				<span class="px-1 relative text-primary text-xs font-semibold">
 					Extra {{ discountPercentage }}% de desconto
@@ -55,7 +44,6 @@
 
 <script setup>
 import { useUserStore } from '~/stores/user';
-import { computed, onMounted, ref, toRefs } from 'vue';
 
 const props = defineProps(['product']);
 const { product } = toRefs(props);
@@ -63,8 +51,16 @@ const { product } = toRefs(props);
 const userStore = useUserStore();
 const user = useSupabaseUser();
 
-const isFavorite = computed(() => {
-	return userStore.favorites.includes(product.value.id);
+const priceComputed = computed(() => {
+	return (product.value.price / 100).toFixed(2);
+});
+
+const discountPercentage = product.value.discountPercentage || 0;
+
+const oldPriceComputed = computed(() => {
+	const discountedPrice =
+		product.value.price - (product.value.price * discountPercentage) / 100;
+	return (discountedPrice / 100).toFixed(2);
 });
 
 onMounted(async () => {
@@ -86,50 +82,5 @@ onMounted(async () => {
 			// Handle the error, such as displaying a message to the user
 		}
 	}
-});
-
-const toggleFavorite = async () => {
-	try {
-		await useFetch('/api/prisma/add-favorite', {
-			method: 'POST',
-			body: {
-				userId: user.value.id,
-				productId: product.value.id,
-			},
-		});
-
-		// Certifique-se de que this.favorites é uma matriz
-		if (!Array.isArray(userStore.favorites)) {
-			userStore.favorites = [];
-		}
-
-		// Verifique se o produto já está nos favoritos usando includes
-		const isAlreadyFavorite = userStore.favorites.includes(product.value.id);
-
-		if (isAlreadyFavorite) {
-			// Se já estiver nos favoritos, remova-o
-			userStore.favorites = userStore.favorites.filter(
-				(id) => id !== product.value.id
-			);
-		} else {
-			// Se não estiver nos favoritos, adicione-o
-			userStore.favorites.push(product.value.id);
-		}
-	} catch (error) {
-		console.error('Error toggling favorite:', error);
-		// Lide com o erro, como exibir uma mensagem para o usuário
-	}
-};
-
-const priceComputed = computed(() => {
-	return (product.value.price / 100).toFixed(2);
-});
-
-const discountPercentage = product.value.discountPercentage || 0;
-
-const oldPriceComputed = computed(() => {
-	const discountedPrice =
-		product.value.price - (product.value.price * discountPercentage) / 100;
-	return (discountedPrice / 100).toFixed(2);
 });
 </script>

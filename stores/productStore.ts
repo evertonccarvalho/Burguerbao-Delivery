@@ -8,7 +8,7 @@ export const useProductStore = defineStore('productStore', {
 	state: () => ({
 		products: [] as Products[],
 		categories: [] as Category[],
-		favorites: [] as Favorites[],
+		// favorites: [] as Favorites[],
 	}),
 
 	actions: {
