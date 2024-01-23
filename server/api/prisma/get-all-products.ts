@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export type Product = {
+export type Products = {
 	id: number;
 	title: string;
 	description: string;
@@ -15,7 +15,7 @@ export type Product = {
 
 export default defineEventHandler(async (event: any) => {
 	try {
-		const products: Product[] = await prisma.products.findMany();
+		const products: Products[] = await prisma.products.findMany();
 
 		// Log the products to see if they are fetched correctly
 		console.log('apiPRODUCTS', products);
