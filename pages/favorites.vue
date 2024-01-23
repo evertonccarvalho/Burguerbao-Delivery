@@ -63,10 +63,10 @@ onBeforeMount(async () => {
 
 onMounted(() => {
 	if (!user.value) {
-		// Se não houver usuário, redireciona para a página de autenticação
+		// Redireciona para a página de autenticação
 		return navigateTo('/auth');
 	}
-
-	setTimeout(() => (userStore.isLoading = false), 200);
+	// Se houver um usuário, indica que o carregamento está completo
+	userStore.isLoading = false;
 });
 </script>

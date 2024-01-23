@@ -95,7 +95,7 @@ const user = useSupabaseUser();
 let selectedArray = ref([]);
 
 onMounted(() => {
-	setTimeout(() => (userStore.isLoading = false), 200);
+	userStore.isLoading = false;
 });
 
 const cards = ref(['visa.png', 'mastercard.png', 'paypal.png', 'applepay.png']);

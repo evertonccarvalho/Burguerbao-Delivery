@@ -11,10 +11,7 @@ import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
 const route = useRoute();
 
-watch(
-	() => route.fullPath,
-	() => {
-		userStore.isLoading = true;
-	}
-);
+watchEffect(() => {
+	userStore.isLoading = true;
+});
 </script>

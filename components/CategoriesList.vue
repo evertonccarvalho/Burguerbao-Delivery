@@ -2,7 +2,7 @@
 	<section>
 		<h1 class="text-2xl p-2 w-full text-center font-bold">Por Categoria</h1>
 		<div
-			v-if="categories && !loading"
+			v-if="categories && categories.length > 0"
 			class="flex justify-start md:justify-center md:flex-row overflow-x-auto gap-2"
 		>
 			<Category
@@ -17,7 +17,7 @@
 		<div>
 			<h1 class="text-2xl p-2 w-full text-center font-bold"></h1>
 			<div
-				v-if="filteredProducts.length > 0"
+				v-if="filteredProducts"
 				class="grid xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-4"
 			>
 				<ProductComponent
@@ -32,39 +32,31 @@
 
 <script setup>
 import { ref, onBeforeMount, computed } from 'vue';
-import { useUserStore } from '~/stores/user';
 import { useProductStore } from '~/stores/productStore';
+const userStore = useUserStore();
 
 const productStore = useProductStore();
 
-const categories = ref([]);
-const loading = ref(true);
 const selectedCategory = ref(null);
+const { fetchCategories } = productStore; // have all non reactiave stuff here
+const { categories } = storeToRefs(productStore);
 
-// Utilize diretamente a propriedade reativa do store
-const products = ref(productStore.products);
-
-onBeforeMount(async () => {
+const loadCategories = async () => {
 	try {
-		await productStore.fetchProducts();
-		categories.value = productStore.categories;
-		loading.value = false;
+		await fetchCategories();
+		userStore.isLoading = false;
 	} catch (error) {
 		console.error('Erro ao carregar categorias:', error);
-		loading.value = false;
+	} finally {
+		userStore.isLoading = false;
 	}
-});
+};
+
+loadCategories();
 
 const handleCategoryClick = async (categoryId) => {
 	console.log(`Categoria clicada no componente: ${categoryId}`);
 	selectedCategory.value = categoryId;
-
-	try {
-		// Fetch produtos com base na categoria selecionada
-		await productStore.fetchProducts(categoryId);
-	} catch (error) {
-		console.error('Erro ao carregar produtos da categoria:', error);
-	}
 };
 
 const filteredProducts = computed(() => {

@@ -67,26 +67,26 @@ const isFavorite = computed(() => {
 	return userStore.favorites.includes(product.value.id);
 });
 
-onMounted(async () => {
-	if (user.value) {
-		try {
-			// Only make the API call if the user is authenticated
-			const response = await useFetch(
-				`/api/prisma/get-all-favorites-by-user/${user.value.id}`,
-				{
-					method: 'GET',
-				}
-			);
+// onMounted(async () => {
+// 	if (user.value) {
+// 		try {
+// 			// Only make the API call if the user is authenticated
+// 			const response = await useFetch(
+// 				`/api/prisma/get-all-favorites-by-user/${user.value.id}`,
+// 				{
+// 					method: 'GET',
+// 				}
+// 			);
 
-			if (response && response.favorites) {
-				userStore.setFavorites(response.favorites);
-			}
-		} catch (error) {
-			console.error('Error fetching favorites:', error);
-			// Handle the error, such as displaying a message to the user
-		}
-	}
-});
+// 			if (response && response.favorites) {
+// 				userStore.setFavorites(response.favorites);
+// 			}
+// 		} catch (error) {
+// 			console.error('Error fetching favorites:', error);
+// 			// Handle the error, such as displaying a message to the user
+// 		}
+// 	}
+// });
 
 const toggleFavorite = async () => {
 	try {
