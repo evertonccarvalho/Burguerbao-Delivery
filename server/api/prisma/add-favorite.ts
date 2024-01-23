@@ -5,7 +5,7 @@ const prisma = new PrismaClient();
 export default defineEventHandler(async (event) => {
 	try {
 		const body = await readBody(event);
-		console.log('Response body:', body);
+		console.log('Request body:', body);
 
 		// Check if the required properties are present in the body
 		if (!body || !body.userId || !body.productId) {
@@ -33,6 +33,11 @@ export default defineEventHandler(async (event) => {
 					productId: existingFavorite.productId,
 				},
 			});
+
+			return {
+				status: 200,
+				body: JSON.stringify({ success: 'Favorite removed successfully' }),
+			};
 		} else {
 			// Se não existir, adicionar o favorito
 			const newFavorite = await prisma.favorites.create({
@@ -42,7 +47,10 @@ export default defineEventHandler(async (event) => {
 				},
 			});
 
-			return newFavorite;
+			return {
+				status: 201, // 201 Created status code for successful creation
+				body: JSON.stringify({ success: 'Favorite added successfully' }),
+			};
 		}
 	} catch (error) {
 		console.error('Error toggling favorite:', error);
@@ -50,5 +58,7 @@ export default defineEventHandler(async (event) => {
 			status: 500,
 			body: JSON.stringify({ error: 'Internal Server Error' }),
 		};
+	} finally {
+		await prisma.$disconnect();
 	}
 });

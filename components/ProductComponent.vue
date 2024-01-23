@@ -28,7 +28,7 @@
 						>R$ {{ priceComputed }}
 					</span>
 
-					<FavoriteButton :productId="product.id" :userId="user.id" />
+					<FavoriteButton :productId="product.id" :userId="user?.id" />
 				</span>
 				<span class="px-1 relative text-primary text-xs font-semibold">
 					Extra {{ discountPercentage }}% de desconto
@@ -42,10 +42,19 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import type { Favorites, Products } from '@prisma/client';
 import { useUserStore } from '~/stores/user';
 
-const props = defineProps(['product']);
+interface Product {
+	id: number;
+	price: number;
+	imageUrls: string;
+	discountPercentage?: number;
+	title: string;
+}
+
+const props = defineProps<{ product: Product }>();
 const { product } = toRefs(props);
 
 const userStore = useUserStore();
@@ -63,24 +72,46 @@ const oldPriceComputed = computed(() => {
 	return (discountedPrice / 100).toFixed(2);
 });
 
-onMounted(async () => {
-	if (user.value) {
-		try {
-			// Only make the API call if the user is authenticated
-			const response = await useFetch(
-				`/api/prisma/get-all-favorites-by-user/${user.value.id}`,
-				{
-					method: 'GET',
-				}
-			);
+// let favorite = ref(null);
 
-			if (response && response.favorites) {
-				userStore.setFavorites(response.favorites);
-			}
-		} catch (error) {
-			console.error('Error fetching favorites:', error);
-			// Handle the error, such as displaying a message to the user
-		}
-	}
-});
+// onBeforeMount(async () => {
+// 	if (user.value?.id) {
+// 		try {
+// 			const response = await useFetch(
+// 				`/api/prisma/get-isfavorite-by-user/${user.value.id}`
+// 			);
+// 			favorite.value = response.data.value; // Ou ajuste conforme a estrutura real da resposta
+// 		} catch (error) {
+// 			console.error('Error fetching favorites:', error);
+// 			// Handle the error, such as displaying a message to the user
+// 		}
+// 	}
+// });
+
+// watchEffect(() => {
+// 	if (favorite.value && favorite.value) {
+// 		// Atualiza a variável currentImage com o valor de product.value.data.imageUrls
+// 		favorite.value = favorite.value.data;
+// 		userStore.isLoading = false;
+// 	}
+// });
+
+// onMounted(async () => {
+// 	if (user.value?.id) {
+// 		try {
+// 			// const response = await useFetch(
+// 			// 	`/api/prisma/get-isfavorite-by-user/${user.value.id}`
+// 			// );
+
+// 			if (response.data) {
+// 				userStore.favorites.push(response.data); // Assuming response.data is an array of favorite objects
+// 			} else {
+// 				// Handle the case where the response does not contain the expected data
+// 			}
+// 		} catch (error) {
+// 			console.error('Error fetching favorites:', error);
+// 			// Handle the error, such as displaying a message to the user
+// 		}
+// 	}
+// });
 </script>
