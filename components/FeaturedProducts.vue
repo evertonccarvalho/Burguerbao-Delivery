@@ -16,11 +16,11 @@
 
 <script setup>
 import { useProductStore } from '~/stores/productStore';
-const { fetchProducts, products } = useProductStore();
+// const { fetchProducts, products } = useProductStore();
 
-// const store = useProductStore();
-// const { fetchProducts } = store; // have all non reactiave stuff here
-// const { products } = storeToRefs(store);
+const store = useProductStore();
+const { fetchProducts } = store; // have all non reactiave stuff here
+const { products } = storeToRefs(store);
 
 await fetchProducts();
 console.log(products);

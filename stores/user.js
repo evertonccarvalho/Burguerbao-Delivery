@@ -9,7 +9,6 @@ export const useUserStore = defineStore('user', {
 		checkout: [],
 		favorites: [], // Initialize favorites as an empty array
 		isFavorite: false, // Add isFavorite to the state
-		selectedCategory: [],
 	}),
 
 	actions: {
@@ -28,9 +27,7 @@ export const useUserStore = defineStore('user', {
 			// Define a lista completa de favoritos
 			this.favorites = favorites;
 		},
-		selectCategory(categoryId) {
-			this.selectedCategory = categoryId;
-		},
+
 		clearUser() {
 			// Clear user-related information when the user logs out
 			this.favorites = [];

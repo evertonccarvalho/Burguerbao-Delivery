@@ -2,10 +2,10 @@
 	<MainLayout>
 		<HeroBanner />
 		<div id="IndexPage" class="mt-4 text-foreground container mx-auto px-2">
-			<FeaturedProducts />
+			<!-- <FeaturedProducts /> -->
 			<!-- CATEGORIAS -->
 			<CategoriesList />
-			<ProductList />
+			<!-- <ProductList /> -->
 			<!-- PRODUTOS -->
 		</div>
 	</MainLayout>

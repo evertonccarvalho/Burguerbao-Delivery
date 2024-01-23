@@ -28,7 +28,6 @@ const { category, selected } = toRefs(props);
 const emit = defineEmits(['click']);
 
 const handleClick = () => {
-	console.log('Clicado!'); // Adicione este console para depuração
 	emit('click', category.id);
 };
 </script>
