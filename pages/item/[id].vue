@@ -1,97 +1,25 @@
+<!-- ItemPage.vue -->
 <template>
 	<MainLayout>
 		<div
 			id="ItemPage"
-			class="mt-4 container w-full flex p-4 h-screen mx-auto px-2"
+			class="mt-4 md:mt-8 container p-4 mx-auto sm:px-4 md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl"
 		>
 			<div class="md:flex gap-4 justify-between mx-auto w-full">
-				<div
-					v-if="product && product.data"
-					class="md:w-[40%] rounded-lg bg-card/50 p-2"
-				>
-					<div
-						class="flex h-[400px] w-full items-center justify-center rounded-lg bg-card"
-					>
-						<img
-							v-if="currentImage"
-							class="rounded-lg object-fit h-auto max-h-[80%] w-auto max-w-[90%]"
-							sizes="100vw"
-							:src="currentImage"
-						/>
-					</div>
-					<div
-						v-if="product.data.imageUrls && product.data.imageUrls.length > 1"
-						class="flex items-center gap-2 justify-center mt-2"
-					>
-						<div
-							class="flex gap-2 h-32 w-32 border-[3px] items-center bg-card justify-center rounded-md"
-							v-for="image in product.data.imageUrls"
-							:class="currentImage === image ? 'border-primary' : ''"
-							:key="image"
-						>
-							<img
-								@mouseover="setCurrentImage(image)"
-								@click="setCurrentImage(image)"
-								sizes="full"
-								class="rounded-md cursor-pointer h-auto max-h-[80%] w-auto max-w-[90%]"
-								:src="image"
-							/>
-						</div>
-					</div>
+				<div class="md:w-[40%] rounded-lg bg-card/50 p-2">
+					<ProductImages
+						:product="product"
+						:currentImage="currentImage"
+						:setCurrentImage="setCurrentImage"
+					/>
 				</div>
-
 				<div class="md:w-[60%] bg-card/50 w-full p-3 rounded-lg">
-					<div v-if="product && product.data">
-						<p class="mb-2">{{ product.data.title }}</p>
-						<p class="font-light text-[12px] mb-2">
-							{{ product.data.description }}
-						</p>
-					</div>
-
-					<div class="flex items-center pt-1.5">
-						<span class="h-4 min-w-4 rounded-full p-0.5 bg-[#FFD000] mr-2">
-							<Icon
-								name="material-symbols:star-rounded"
-								class="-mt-[17px]"
-								size="12"
-							/>
-						</span>
-						<p class="text-[#FF5353]">Extra 5% off</p>
-					</div>
-
-					<div class="flex items-center justify-start my-2">
-						<Icon name="ic:baseline-star" color="#FF5353" />
-						<Icon name="ic:baseline-star" color="#FF5353" />
-						<Icon name="ic:baseline-star" color="#FF5353" />
-						<Icon name="ic:baseline-star" color="#FF5353" />
-						<Icon name="ic:baseline-star" color="#FF5353" />
-						<span class="text-[13px] font-light ml-2"
-							>5 213 Reviews 1,000+ orders</span
-						>
-					</div>
-
-					<div class="border-b" />
-
-					<div class="flex items-center justify-start gap-2 my-2">
-						<div class="text-xl font-bold">R$ {{ priceComputed }}</div>
-						<span
-							class="bg-card-foreground border text-secondary text-[9px] font-semibold px-1.5 rounded-sm"
-							>70% off</span
-						>
-					</div>
-
-					<p class="text-[#009A66] text-xs font-semibold pt-1">
-						Free 11-day delivery over ￡8.28
-					</p>
-
-					<p class="text-[#009A66] text-xs font-semibold pt-1">Free Shipping</p>
-
-					<div class="py-2" />
-
-					<Button @click="addToCart()" :disabled="isInCart">
-						<div v-if="isInCart">Is Added</div>
-						<div v-else>Add to Cart</div>
-					</Button>
+					<ProductDetails
+						:product="product"
+						:priceComputed="priceComputed"
+						:isInCart="isInCart"
+						:addToCart="addToCart"
+					/>
 				</div>
 			</div>
 		</div>
@@ -121,7 +49,7 @@ watchEffect(() => {
 	if (product.value && product.value.data) {
 		// Atualiza a variável currentImage com o valor de product.value.data.imageUrls
 		currentImage.value = product.value.data.imageUrls;
-
+		// discountPercentage.value = product.value.data.discountPercentage;
 		// Atribui o primeiro elemento do array product.value.data.imageUrls a ele mesmo
 		// Isso pode não ter o efeito desejado, pois está substituindo o primeiro elemento pelo array completo
 		product.value.data.imageUrls = product.value.data.imageUrls;

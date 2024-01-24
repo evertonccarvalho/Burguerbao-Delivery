@@ -1,7 +1,7 @@
 <template>
 	<MainLayout>
-		<HeroBanner />
 		<div id="IndexPage" class="mt-4 text-foreground container mx-auto px-2">
+			<HeroBanner />
 			<!-- CATEGORIAS -->
 			<CategoriesList />
 			<FeaturedProductsGRID />
