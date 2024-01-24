@@ -13,7 +13,7 @@
 
 				<Icon name="mdi:heart" size="33" />
 			</div>
-			Carrinho
+			Favoritos
 		</button>
 	</NuxtLink>
 </template>
