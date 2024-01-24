@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event: any) => {
 	try {
-		const userId = event.context.params.userId;
+		const userId = event.context.params.id;
 
 		const orders: Orders[] = await prisma.orders.findMany({
 			where: { userId: userId },

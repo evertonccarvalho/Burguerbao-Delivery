@@ -1,20 +1,23 @@
 import { PrismaClient, type Favorites } from '@prisma/client';
-
 const prisma = new PrismaClient();
 
 export default defineEventHandler(async (event: any) => {
 	try {
-		const userId = event.context.params.userId;
+		const userId = event.context.params.id;
 
-		const favorites: Favorites[] = await prisma.favorites.findMany({
+		const favorites: Favorites[] | null = await prisma.favorites.findMany({
 			where: { userId: userId },
 			orderBy: { id: 'desc' },
 			include: {
-				product: true,
+				favoriteIte: {
+					include: {
+						product: true,
+					},
+				},
 			},
 		});
 
-		console.log('Fetched favorites:', favorites);
+		console.log('Fetched favorites for user ID', userId, ':', favorites);
 
 		return favorites;
 	} catch (error) {

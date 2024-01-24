@@ -63,18 +63,25 @@
 	</MainLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { type Orders } from '@prisma/client';
 import MainLayout from '~/layouts/MainLayout.vue';
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
 const user = useSupabaseUser();
 
-let orders = ref(null);
+const orders = ref();
 
 onBeforeMount(async () => {
-	orders.value = await useFetch(
-		`/api/prisma/get-all-orders-by-user/${user.value.id}`
-	);
+	if (user.value)
+		try {
+			orders.value = await useFetch(
+				`/api/prisma/get-all-orders-by-user/${user.value.id}`
+			);
+			console.log(orders.value);
+		} catch (error) {
+			console.error('Error fetching orders:', error);
+		}
 });
 
 onMounted(() => {

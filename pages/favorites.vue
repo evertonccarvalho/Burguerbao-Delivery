@@ -17,61 +17,64 @@
 						class="text-sm pl-[50px]"
 					>
 						<div class="border-b py-1">
-							<NuxtLink
-								class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
-								:to="`/item/${favorite.productId}`"
-							>
-								<div
-									class="flex h-[40px] w-[40px] items-center justify-center rounded-xl bg-card"
+							<div v-for="item in favorite.favoriteIte" :key="item.id">
+								<NuxtLink
+									class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
+									:to="`/item/${item.productId}`"
 								>
-									<img
-										class="rounded-md h-auto max-h-[80%]"
-										sizes="100vw"
-										:src="favorite.product.imageUrls"
-									/>
-								</div>
-								{{ favorite.product.title }}
-							</NuxtLink>
+									<div
+										class="flex h-[40px] w-[40px] items-center justify-center rounded-xl bg-card"
+									>
+										<img
+											class="rounded-md h-auto max-h-[80%]"
+											sizes="100vw"
+											:src="item.product.imageUrls"
+										/>
+									</div>
+									{{ item.product.title }}
+								</NuxtLink>
+							</div>
 						</div>
 					</div>
-				</div>
-
-				<div v-else class="flex items-center justify-center">
-					Você não possui favoritos.
 				</div>
 			</div>
 		</div>
 	</MainLayout>
 </template>
 
-<script setup>
-import MainLayout from '~/layouts/MainLayout.vue';
+<script setup lang="ts">
 import { useUserStore } from '~/stores/user';
+import MainLayout from '~/layouts/MainLayout.vue';
+import { ref, onBeforeMount, onMounted } from 'vue';
+
 const userStore = useUserStore();
 const user = useSupabaseUser();
+// const favorites = ref(null);
 
-let favorites = ref(null);
+const favorites = ref();
 
 onBeforeMount(async () => {
-	if (user.value) {
-		try {
-			// Fetch favorites
-			favorites.value = await useFetch(
-				`/api/prisma/get-isfavorite-by-user/${user.value.id}`
-			);
-		} catch (error) {
-			console.error('Error fetching favorites:', error);
-			// Handle the error, e.g., show a message to the user
-		}
+	{
+		if (user.value)
+			try {
+				// Fetch favorites
+				favorites.value = await useFetch(
+					`/api/prisma/get-all-favorites-by-user/${user.value.id}`
+				);
+				console.log(favorites.value);
+			} catch (error) {
+				console.error('Error fetching favorites:', error);
+				// Handle the error, e.g., show a message to the user
+			}
 	}
 });
 
 onMounted(() => {
 	if (!user.value) {
-		// Redireciona para a página de autenticação
+		// Redirect to the authentication page
 		return navigateTo('/auth');
 	}
-	// Se houver um usuário, indica que o carregamento está completo
+	// If there is a user, indicate that loading is complete
 	userStore.isLoading = false;
 });
 </script>

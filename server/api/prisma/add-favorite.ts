@@ -9,6 +9,7 @@ export default defineEventHandler(async (event) => {
 
 		// Check if the required properties are present in the body
 		if (!body || !body.userId || !body.productId) {
+			console.error('Invalid request body');
 			return {
 				status: 400,
 				body: JSON.stringify({ error: 'Invalid request body' }),
@@ -27,26 +28,45 @@ export default defineEventHandler(async (event) => {
 
 		// For delete
 		if (existingFavorite) {
-			await prisma.favorites.deleteMany({
-				where: {
-					userId: existingFavorite.userId,
-					productId: existingFavorite.productId,
-				},
-			});
+			console.log('Removing favorite:', existingFavorite);
 
+			await prisma.$transaction([
+				prisma.favoriteItem.deleteMany({
+					where: {
+						favoritesId: existingFavorite.id,
+					},
+				}),
+				prisma.favorites.delete({
+					where: {
+						id: existingFavorite.id,
+					},
+				}),
+			]);
+
+			console.log('Favorite removed successfully');
 			return {
 				status: 200,
 				body: JSON.stringify({ success: 'Favorite removed successfully' }),
 			};
 		} else {
 			// Se não existir, adicionar o favorito
-			const newFavorite = await prisma.favorites.create({
+
+			console.log('Adding new favorite:', { userId, productId });
+			const favorite = await prisma.favorites.create({
 				data: {
 					userId: body.userId,
 					productId: body.productId,
 				},
 			});
 
+			await prisma.favoriteItem.create({
+				data: {
+					favoritesId: favorite.id,
+					productId: body.productId,
+				},
+			});
+
+			console.log('Favorite added successfully');
 			return {
 				status: 201, // 201 Created status code for successful creation
 				body: JSON.stringify({ success: 'Favorite added successfully' }),

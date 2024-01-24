@@ -16,7 +16,8 @@
 	</div>
 </template>
 
-<script setup>
+<script setup lagn="ts">
+// export { MainLayout };
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
 </script>
