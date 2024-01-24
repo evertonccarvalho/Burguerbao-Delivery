@@ -10,6 +10,7 @@
 				>
 					{{ userStore.favorites.length }}
 				</span>
+
 				<Icon name="mdi:heart" size="33" />
 			</div>
 			Carrinho
@@ -19,8 +20,8 @@
 
 <script setup>
 import { useUserStore } from '~/stores/user';
-
 const userStore = useUserStore();
+
 const user = useSupabaseUser();
 
 const fetchFavorites = async (userId) => {
@@ -35,15 +36,14 @@ const fetchFavorites = async (userId) => {
 	}
 };
 
-const setupFavorites = async () => {
+onMounted(async () => {
 	try {
 		const userId = user.value.id;
 		const favorites = await fetchFavorites(userId);
+
 		userStore.favorites = favorites.map((item) => item.productId);
 	} catch (error) {
 		console.error('Error during component setup:', error);
 	}
-};
-
-onMounted(setupFavorites);
+});
 </script>

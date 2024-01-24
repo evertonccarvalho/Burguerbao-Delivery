@@ -1,17 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient, type Category } from '@prisma/client';
+
 const prisma = new PrismaClient();
-
-// export default defineEventHandler(async (event) => {
-// 	let categories = await prisma.category.findMany();
-// 	return categories;
-// });
-
-export type Category = {
-	id: number;
-	name: string;
-	slug: string;
-	imageUrl: string | null;
-};
 
 export default defineEventHandler(async (event: any) => {
 	try {
@@ -24,7 +13,7 @@ export default defineEventHandler(async (event: any) => {
 	} catch (error) {
 		// Handle errors appropriately
 		console.error('Error fetching categories:', error);
-		throw error; // Re-throw the error for further handling
+		throw new Error('Failed to fetch categories.'); // Re-throw the error for further handling
 	} finally {
 		await prisma.$disconnect(); // Disconnect Prisma client after fetching
 	}
