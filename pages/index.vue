@@ -2,8 +2,9 @@
 	<MainLayout>
 		<div id="IndexPage" class="mt-4 text-foreground container mx-auto px-2">
 			<HeroBanner />
-			<!-- CATEGORIAS -->
+			<!-- CATEGORIES -->
 			<CategoriesList />
+
 			<FeaturedProductsGRID />
 			<!-- <ProductList /> -->
 			<!-- PRODUTOS -->

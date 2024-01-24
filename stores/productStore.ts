@@ -37,22 +37,6 @@ export const useProductStore = defineStore('productStore', {
 				console.error('Erro ao carregar categorias:', error);
 			}
 		},
-
-		// async fetchFavorite() {
-		// 	const user = useSupabaseUser();
-
-		// 	try {
-		// 		const userId = user.value?.id;
-		// 		const { data: favorites } = await useFetch(
-		// 			`/api/prisma/get-all-favorites-by-user/${userId}`
-		// 		);
-		// 		if (favorites.value) {
-		// 			this.favorites = favorites.value as Favorites[];
-		// 		}
-		// 	} catch (error) {
-		// 		console.error('Error loading favorites:', error);
-		// 	}
-		// },
 	},
 
 	persist: true,

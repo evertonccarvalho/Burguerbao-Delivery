@@ -10,7 +10,6 @@
 				>
 					{{ userStore.favorites.length }}
 				</span>
-
 				<Icon name="mdi:heart" size="33" />
 			</div>
 			Carrinho
@@ -20,5 +19,31 @@
 
 <script setup>
 import { useUserStore } from '~/stores/user';
+
 const userStore = useUserStore();
+const user = useSupabaseUser();
+
+const fetchFavorites = async (userId) => {
+	try {
+		const favoritesAPI = await useFetch(
+			`/api/prisma/get-all-favorites-by-user/${userId}`
+		);
+		return favoritesAPI.data?.value || [];
+	} catch (error) {
+		console.error('Error fetching favorites:', error);
+		return [];
+	}
+};
+
+const setupFavorites = async () => {
+	try {
+		const userId = user.value.id;
+		const favorites = await fetchFavorites(userId);
+		userStore.favorites = favorites.map((item) => item.productId);
+	} catch (error) {
+		console.error('Error during component setup:', error);
+	}
+};
+
+onMounted(setupFavorites);
 </script>

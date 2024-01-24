@@ -26,30 +26,45 @@ const isFavorite = computed(() => {
 
 const toggleFavorite = async () => {
 	try {
-		// Assuming productId is passed as a prop
-		await useFetch('/api/prisma/add-favorite', {
-			method: 'POST',
-			body: {
-				userId: props.userId,
-				productId: props.productId,
-			},
-		});
-
-		if (!Array.isArray(userStore.favorites)) {
-			userStore.favorites = [];
+		const { userId, productId } = props;
+		console.log(userId);
+		if (!userId) {
+			console.warn('User not authenticated. Cannot toggle favorite.');
+			return;
 		}
 
-		const isAlreadyFavorite = userStore.favorites.includes(props.productId);
+		await addOrRemoveFavorite(userId, productId);
 
-		if (isAlreadyFavorite) {
-			userStore.favorites = userStore.favorites.filter(
-				(id) => id !== props.productId
-			);
-		} else {
-			userStore.favorites.push(props.productId);
-		}
+		updateFavoritesInStore(productId);
 	} catch (error) {
 		console.error('Error toggling favorite:', error);
+	}
+};
+
+const addOrRemoveFavorite = async (userId, productId) => {
+	const method = 'POST'; // Assuming it's always a POST request
+	const url = '/api/prisma/add-favorite';
+
+	await useFetch(url, {
+		method,
+		body: { userId, productId },
+	});
+};
+
+const updateFavoritesInStore = (productId) => {
+	const { favorites } = userStore;
+
+	if (!Array.isArray(favorites)) {
+		userStore.favorites = [];
+		return;
+	}
+
+	const isAlreadyFavorite = favorites.includes(productId);
+
+	if (isAlreadyFavorite) {
+		userStore.favorites = favorites.filter((id) => id !== productId);
+	} else {
+		userStore.favorites.push(productId);
 	}
 };
 </script>
