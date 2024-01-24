@@ -55,7 +55,6 @@ const loadCategories = async () => {
 loadCategories();
 
 const handleCategoryClick = async (categoryId) => {
-	console.log(`Categoria clicada no componente: ${categoryId}`);
 	selectedCategory.value = categoryId;
 };
 
@@ -63,38 +62,11 @@ const filteredProducts = computed(() => {
 	const categoryId = selectedCategory.value;
 
 	if (!categoryId || !productStore.products) {
-		console.log('Sem filtro, mostrando todos os produtos.');
 		return productStore.products || [];
 	}
 
-	console.log('Filtrando por categoria:', categoryId);
 	return productStore.products.filter(
 		(product) => product.categoryId === categoryId
 	);
 });
-
-const user = useSupabaseUser();
-// onBeforeMount(async () => {
-// 	if (user.value) {
-// 		try {
-// 			const response = await useFetch(
-// 				`/api/prisma/get-all-favorites-by-user/${user.value.id}`
-// 			);
-
-// 			console.log('Response:', response);
-
-// 			const favoritesArray = response.data.value;
-
-// 			if (Array.isArray(favoritesArray)) {
-// 				userStore.favorites.push(...favoritesArray);
-// 				console.log(userStore);
-// 			} else {
-// 				console.error('Invalid or missing data structure:', favoritesArray);
-// 			}
-// 		} catch (error) {
-// 			console.error('Error fetching favorites:', error);
-// 			// Handle the error, such as displaying a message to the user
-// 		}
-// 	}
-// });
 </script>

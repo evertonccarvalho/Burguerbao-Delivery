@@ -25,25 +25,28 @@ const userStore = useUserStore();
 const user = useSupabaseUser();
 
 const fetchFavorites = async (userId) => {
-	try {
-		const favoritesAPI = await useFetch(
-			`/api/prisma/get-all-favorites-by-user/${userId}`
-		);
-		return favoritesAPI.data?.value || [];
-	} catch (error) {
-		console.error('Error fetching favorites:', error);
-		return [];
-	}
+	if (user.value)
+		try {
+			const favoritesAPI = await useFetch(
+				`/api/prisma/get-all-favorites-by-user/${userId}`
+			);
+			return favoritesAPI.data?.value || [];
+		} catch (error) {
+			console.error('Error fetching favorites:', error);
+			return [];
+		}
 };
+fetchFavorites();
 
 onMounted(async () => {
-	try {
-		const userId = user.value.id;
-		const favorites = await fetchFavorites(userId);
+	if (user.value)
+		try {
+			const userId = user.value.id;
+			const favorites = await fetchFavorites(userId);
 
-		userStore.favorites = favorites.map((item) => item.productId);
-	} catch (error) {
-		console.error('Error during component setup:', error);
-	}
+			userStore.favorites = favorites.map((item) => item.productId);
+		} catch (error) {
+			console.error('Error during component setup:', error);
+		}
 });
 </script>
