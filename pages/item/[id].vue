@@ -14,12 +14,7 @@
 					/>
 				</div>
 				<div class="md:w-[60%] bg-card/50 w-full p-3 rounded-lg">
-					<ProductDetails
-						:product="product"
-						:priceComputed="priceComputed"
-						:isInCart="isInCart"
-						:addToCart="addToCart"
-					/>
+					<ProductDetails :product="product" :priceComputed="priceComputed" />
 				</div>
 			</div>
 		</div>

@@ -57,7 +57,7 @@ onBeforeMount(async () => {
 		try {
 			// Fetch favorites
 			favorites.value = await useFetch(
-				`/api/prisma/get-all-favorites-by-user/${user.value.id}`
+				`/api/prisma/get-isfavorite-by-user/${user.value.id}`
 			);
 		} catch (error) {
 			console.error('Error fetching favorites:', error);

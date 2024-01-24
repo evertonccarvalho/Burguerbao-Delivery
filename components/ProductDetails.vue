@@ -22,10 +22,7 @@
 
 		<div class="flex items-center justify-start gap-2 my-2">
 			<div class="text-xl font-bold">R$ {{ priceComputed }}</div>
-			<Button @click="addToCart" :disabled="isInCart">
-				<div v-if="isInCart">Is Added</div>
-				<div v-else>Adicionar ao Carrinho</div>
-			</Button>
+			<AddToCartButton :product="product" />
 		</div>
 	</div>
 </template>
@@ -35,7 +32,7 @@
 const props = defineProps([
 	'product',
 	'priceComputed',
-	'isInCart',
-	'addToCart',
+	// 'isInCart',
+	// 'addToCart',
 ]);
 </script>

@@ -38,12 +38,12 @@
 					{{ product.title.substring(0, 60) }}
 				</p>
 			</div>
+			<!-- <AddToCartButton :product="product.id" /> -->
 		</div>
 	</div>
 </template>
 
 <script setup lang="ts">
-import type { Favorites, Products } from '@prisma/client';
 import { useUserStore } from '~/stores/user';
 
 interface Product {
@@ -71,6 +71,16 @@ const oldPriceComputed = computed(() => {
 		product.value.price - (product.value.price * discountPercentage) / 100;
 	return (discountedPrice / 100).toFixed(2);
 });
+
+// const isInCart = computed(() => {
+// 	let res = false;
+// 	userStore.cart.forEach((prod) => {
+// 		if (route.params.id == prod.id) {
+// 			res = true;
+// 		}
+// 	});
+// 	return res;
+// });
 
 // let favorite = ref(null);
 
