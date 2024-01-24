@@ -44,8 +44,6 @@
 </template>
 
 <script setup lang="ts">
-import { useUserStore } from '~/stores/user';
-
 interface Product {
 	id: number;
 	price: number;
@@ -57,7 +55,6 @@ interface Product {
 const props = defineProps<{ product: Product }>();
 const { product } = toRefs(props);
 
-const userStore = useUserStore();
 const user = useSupabaseUser();
 
 const priceComputed = computed(() => {
@@ -71,57 +68,4 @@ const oldPriceComputed = computed(() => {
 		product.value.price - (product.value.price * discountPercentage) / 100;
 	return (discountedPrice / 100).toFixed(2);
 });
-
-// const isInCart = computed(() => {
-// 	let res = false;
-// 	userStore.cart.forEach((prod) => {
-// 		if (route.params.id == prod.id) {
-// 			res = true;
-// 		}
-// 	});
-// 	return res;
-// });
-
-let favorite = ref();
-
-onBeforeMount(async () => {
-	if (user.value) {
-		try {
-			const response = await useFetch(
-				`/api/prisma/get-all-favorites-by-user/${user.value.id}`
-			);
-			userStore.favorites.push(response.data); // Assuming response.data is an array of favorite objects
-		} catch (error) {
-			console.error('Error fetching favorites:', error);
-			// Handle the error, such as displaying a message to the user
-		}
-	}
-});
-
-// watchEffect(() => {
-// 	if (favorite.value && favorite.value) {
-// 		// Atualiza a variável currentImage com o valor de product.value.data.imageUrls
-// 		favorite.value = favorite.value.data;
-// 		userStore.isLoading = false;
-// 	}
-// });
-
-// onMounted(async () => {
-// 	if (user.value?.id) {
-// 		try {
-// 			// const response = await useFetch(
-// 			// 	`/api/prisma/get-isfavorite-by-user/${user.value.id}`
-// 			// );
-
-// 			if (response.data) {
-// 				userStore.favorites.push(response.data); // Assuming response.data is an array of favorite objects
-// 			} else {
-// 				// Handle the case where the response does not contain the expected data
-// 			}
-// 		} catch (error) {
-// 			console.error('Error fetching favorites:', error);
-// 			// Handle the error, such as displaying a message to the user
-// 		}
-// 	}
-// });
 </script>

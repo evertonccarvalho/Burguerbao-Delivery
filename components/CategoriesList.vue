@@ -74,27 +74,27 @@ const filteredProducts = computed(() => {
 });
 
 const user = useSupabaseUser();
-onBeforeMount(async () => {
-	if (user.value) {
-		try {
-			const response = await useFetch(
-				`/api/prisma/get-all-favorites-by-user/${user.value.id}`
-			);
+// onBeforeMount(async () => {
+// 	if (user.value) {
+// 		try {
+// 			const response = await useFetch(
+// 				`/api/prisma/get-all-favorites-by-user/${user.value.id}`
+// 			);
 
-			console.log('Response:', response);
+// 			console.log('Response:', response);
 
-			const favoritesArray = response.data.value;
+// 			const favoritesArray = response.data.value;
 
-			if (Array.isArray(favoritesArray)) {
-				userStore.favorites.push(...favoritesArray);
-				console.log(userStore);
-			} else {
-				console.error('Invalid or missing data structure:', favoritesArray);
-			}
-		} catch (error) {
-			console.error('Error fetching favorites:', error);
-			// Handle the error, such as displaying a message to the user
-		}
-	}
-});
+// 			if (Array.isArray(favoritesArray)) {
+// 				userStore.favorites.push(...favoritesArray);
+// 				console.log(userStore);
+// 			} else {
+// 				console.error('Invalid or missing data structure:', favoritesArray);
+// 			}
+// 		} catch (error) {
+// 			console.error('Error fetching favorites:', error);
+// 			// Handle the error, such as displaying a message to the user
+// 		}
+// 	}
+// });
 </script>
