@@ -82,21 +82,21 @@ const oldPriceComputed = computed(() => {
 // 	return res;
 // });
 
-// let favorite = ref(null);
+let favorite = ref();
 
-// onBeforeMount(async () => {
-// 	if (user.value?.id) {
-// 		try {
-// 			const response = await useFetch(
-// 				`/api/prisma/get-isfavorite-by-user/${user.value.id}`
-// 			);
-// 			favorite.value = response.data.value; // Ou ajuste conforme a estrutura real da resposta
-// 		} catch (error) {
-// 			console.error('Error fetching favorites:', error);
-// 			// Handle the error, such as displaying a message to the user
-// 		}
-// 	}
-// });
+onBeforeMount(async () => {
+	if (user.value) {
+		try {
+			const response = await useFetch(
+				`/api/prisma/get-all-favorites-by-user/${user.value.id}`
+			);
+			userStore.favorites.push(response.data); // Assuming response.data is an array of favorite objects
+		} catch (error) {
+			console.error('Error fetching favorites:', error);
+			// Handle the error, such as displaying a message to the user
+		}
+	}
+});
 
 // watchEffect(() => {
 // 	if (favorite.value && favorite.value) {

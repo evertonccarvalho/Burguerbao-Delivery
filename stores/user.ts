@@ -1,13 +1,6 @@
 // stores/user.ts
+import type { Favorites } from '@prisma/client';
 import { defineStore } from 'pinia';
-import type { Favorites } from '~/server/api/prisma/get-all-favorites-by-user/[id]';
-
-// interface Favorite {
-// 	id: number;
-// 	userId: string;
-// 	productId: number;
-// 	created_at: Date | null;
-// }
 
 interface UserState {
 	isMenuOverlay: boolean;
