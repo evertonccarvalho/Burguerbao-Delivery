@@ -3,8 +3,6 @@
 		<button
 			:class="{ 'text-primary': $route.path === '/shoppingcart' }"
 			class="relative flex flex-col md:flex-row gap-1 items-center justify-center hover:text-primary capitalize text-sm transition-all duration-300"
-			@mouseenter="isCartHover = true"
-			@mouseleave="isCartHover = false"
 		>
 			<div class="relative">
 				<span
@@ -23,5 +21,4 @@
 <script setup>
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
-let isCartHover = ref(false);
 </script>

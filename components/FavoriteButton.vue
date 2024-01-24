@@ -6,7 +6,7 @@
 		:class="{
 			'bg-red-500 rounded-full p-0.5 flex': isFavorite,
 			'p-0.5 flex': !isFavorite,
-			'transition-colors duration-300': true,
+			'transition-colors hover:bg-red-500 rounded-full duration-300': true,
 		}"
 	>
 		<Icon :name="isFavorite ? 'mdi:heart' : 'mdi:heart-outline'" size="20" />

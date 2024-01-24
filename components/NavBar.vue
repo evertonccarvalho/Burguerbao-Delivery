@@ -14,7 +14,8 @@
 			{{ link.name }}
 		</NuxtLink>
 
-		<ShoppingCart />
+		<FavoriteNavIcon />
+		<ShoppingCartNavIcon />
 		<AccountMenu />
 	</nav>
 </template>
@@ -22,8 +23,5 @@
 <script setup>
 import { ref } from 'vue';
 
-const navData = ref([
-	{ name: 'Home', path: '/', icon: 'mdi:home' },
-	{ name: 'Favoritos', path: '/favorites', icon: 'mdi:heart' },
-]);
+const navData = ref([{ name: 'Home', path: '/', icon: 'mdi:home' }]);
 </script>
