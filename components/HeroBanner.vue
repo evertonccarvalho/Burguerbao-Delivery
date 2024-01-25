@@ -1,6 +1,6 @@
 <template>
 	<div
-		class="bg-cover bg-center w-full md:h-[500px] content-center flex items-center"
+		class="bg-cover bg-center w-full md:h-full py-10 content-center flex items-center"
 	>
 		<div class="mx-auto flex items-center py-4 flex-col">
 			<div
