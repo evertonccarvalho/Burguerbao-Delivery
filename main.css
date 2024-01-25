@@ -64,6 +64,34 @@
 	}
 }
 
+/* width */
+/* ::-webkit-scrollbar {
+	width: 5px;
+} */
+/* Define the scrollbar style */
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+/* Track */
+::-webkit-scrollbar-track {
+	background: rgba(75, 75, 75, 0.423);
+	padding: 2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #9d3b08;
+	border-radius: 5px;
+	padding: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #ea580c;
+}
+
 @layer base {
 	* {
 		@apply border-border;

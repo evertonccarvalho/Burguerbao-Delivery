@@ -1,17 +1,16 @@
 <template>
 	<div
-		class="w-full h-screen flex items-center relative bg-no-repeat bg-cover flex-col z-50 overflow-auto"
+		class="w-full h-screen flex items-center relative bg-no-repeat bg-cover flex-col z-50"
 		style="background-image: url('/BG.jpg')"
 	>
 		<div class="w-full h-screen flex items-center flex-col">
 			<Header />
 			<Loading v-if="userStore.isLoading" />
-			<div class="py-14 my-auto w-full">
+			<div class="pt-14 my-auto w-full overflow-auto">
 				<!-- Conteúdo principal da  landing page aqui -->
 				<slot />
+				<Footer v-if="!userStore.isLoading" />
 			</div>
-
-			<Footer v-if="!userStore.isLoading" />
 		</div>
 	</div>
 </template>

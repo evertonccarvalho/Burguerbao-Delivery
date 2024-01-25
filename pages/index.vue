@@ -8,7 +8,7 @@
 			</div> -->
 			<CategoriesList />
 
-			<!-- <FeaturedProductsGRID /> -->
+			<FeaturedProductsGRID />
 			<!-- <ProductList /> -->
 			<!-- PRODUTOS -->
 		</div>

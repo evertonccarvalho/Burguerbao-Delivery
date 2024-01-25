@@ -26,7 +26,10 @@
 			</h1>
 
 			<div class="flex flex-col">
-				<div v-if="products" class="flex flex-row pb-4 overflow-x-auto gap-x-4">
+				<div
+					v-if="products && products.length > 0"
+					class="flex flex-row pb-4 overflow-x-auto gap-x-4"
+				>
 					<ProductComponent
 						v-for="product in products"
 						:key="product.id"
@@ -49,7 +52,7 @@
 			<h1 class="text-2xl p-2 w-full text-center font-bold">Lançamentos</h1>
 
 			<div class="w-full h-full flex flex-col">
-				<div v-if="products" class="flex md:flex-col overflow-x-auto gap-4">
+				<div v-if="products" class="flex md:flex-col gap-4 overflow-x-auto">
 					<ProductComponent
 						v-for="product in products"
 						:key="product.id"
@@ -62,24 +65,20 @@
 	</section>
 </template>
 
-<script setup>
-import { useProductStore } from '~/stores/productStore';
+<script setup lang="ts">
 import { useUserStore } from '~/stores/user';
+import { type Products } from '@prisma/client';
+import { fetchProducts } from '~/lib/services/productService';
 
-const productStore = useProductStore();
-// const products = ref([]);
 const userStore = useUserStore();
-
-const { fetchProducts } = productStore; // have all non reactiave stuff here
-const { products } = storeToRefs(productStore);
+const products = ref<Products[]>([]);
 
 const loadProducts = async () => {
 	try {
-		await fetchProducts();
+		products.value = await fetchProducts();
 		userStore.isLoading = false;
 	} catch (error) {
-		console.error('Erro ao carregar categorias:', error);
-	} finally {
+		console.error('Erro ao carregar produtos:', error);
 		userStore.isLoading = false;
 	}
 };
