@@ -6,7 +6,7 @@
 		<div class="w-full h-screen flex items-center flex-col">
 			<Header />
 			<Loading v-if="userStore.isLoading" />
-			<div class="py-14 my-auto container w-full">
+			<div class="py-14 my-auto w-full">
 				<!-- Conteúdo principal da  landing page aqui -->
 				<slot />
 			</div>
@@ -17,7 +17,6 @@
 </template>
 
 <script setup lagn="ts">
-// export { MainLayout };
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
 </script>
