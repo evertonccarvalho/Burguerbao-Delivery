@@ -53,7 +53,7 @@ onMounted(async () => {
 			// Mapeia os favoritos corretamente antes de atribuí-los ao userStore
 			userStore.favorites = favorites
 				.map((favorite) => {
-					return favorite.favoriteItems.map((item) => item.productId);
+					return favorite.favoriteItem.map((item) => item.productId);
 				})
 				.flat();
 			console.log('Updated userStore with favorites:', userStore.favorites);
