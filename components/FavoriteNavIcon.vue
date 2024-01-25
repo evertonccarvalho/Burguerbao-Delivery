@@ -25,28 +25,41 @@ const userStore = useUserStore();
 const user = useSupabaseUser();
 
 const fetchFavorites = async (userId) => {
-	if (user.value)
-		try {
-			const favoritesAPI = await useFetch(
-				`/api/prisma/get-all-favorites-by-user/${userId}`
-			);
-			return favoritesAPI.data?.value || [];
-		} catch (error) {
-			console.error('Error fetching favorites:', error);
-			return [];
-		}
+	try {
+		const favoritesAPI = await useFetch(
+			`/api/prisma/get-all-favorites-by-user/${userId}`
+		);
+		console.log('Fetched favorites:', favoritesAPI.data);
+		return favoritesAPI.data || [];
+	} catch (error) {
+		console.error('Error fetching favorites:', error);
+		return [];
+	}
 };
-fetchFavorites();
 
 onMounted(async () => {
-	if (user.value)
+	if (user.value) {
 		try {
 			const userId = user.value.id;
-			const favorites = await fetchFavorites(userId);
+			console.log('User ID:', userId);
 
-			userStore.favorites = favorites.map((item) => item.productId);
+			const favoritesResponse = await fetchFavorites(userId);
+			console.log('Fetched favorites:', favoritesResponse);
+
+			// Acessa o array de favoritos dentro do _value
+			const favorites = favoritesResponse._value;
+			console.log('Favorites:', favorites);
+
+			// Mapeia os favoritos corretamente antes de atribuí-los ao userStore
+			userStore.favorites = favorites
+				.map((favorite) => {
+					return favorite.favoriteItems.map((item) => item.productId);
+				})
+				.flat();
+			console.log('Updated userStore with favorites:', userStore.favorites);
 		} catch (error) {
 			console.error('Error during component setup:', error);
 		}
+	}
 });
 </script>

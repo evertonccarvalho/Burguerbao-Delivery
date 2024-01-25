@@ -17,7 +17,7 @@
 						class="text-sm pl-[50px]"
 					>
 						<div class="border-b py-1">
-							<div v-for="item in favorite.favoriteIte" :key="item.id">
+							<div v-for="item in favorite.favoriteItems" :key="item.id">
 								<NuxtLink
 									class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
 									:to="`/item/${item.productId}`"
@@ -45,7 +45,6 @@
 <script setup lang="ts">
 import { useUserStore } from '~/stores/user';
 import MainLayout from '~/layouts/MainLayout.vue';
-import { ref, onBeforeMount, onMounted } from 'vue';
 
 const userStore = useUserStore();
 const user = useSupabaseUser();
@@ -61,7 +60,7 @@ onBeforeMount(async () => {
 				favorites.value = await useFetch(
 					`/api/prisma/get-all-favorites-by-user/${user.value.id}`
 				);
-				console.log(favorites.value);
+				console.log('FAVORITEPAGE', favorites.value);
 			} catch (error) {
 				console.error('Error fetching favorites:', error);
 				// Handle the error, e.g., show a message to the user

@@ -16,13 +16,13 @@ export default defineEventHandler(async (event) => {
 			};
 		}
 
-		const { userId, productId } = body;
+		const { userId: userId, productId: id } = body;
 
 		// Verificar se o produto já está nos favoritos do usuário
 		const existingFavorite = await prisma.favorites.findFirst({
 			where: {
 				userId,
-				productId,
+				id,
 			},
 		});
 
@@ -51,11 +51,11 @@ export default defineEventHandler(async (event) => {
 		} else {
 			// Se não existir, adicionar o favorito
 
-			console.log('Adding new favorite:', { userId, productId });
+			console.log('Adding new favorite:', { userId, id });
 			const favorite = await prisma.favorites.create({
 				data: {
 					userId: body.userId,
-					productId: body.productId,
+					id: body.productId,
 				},
 			});
 

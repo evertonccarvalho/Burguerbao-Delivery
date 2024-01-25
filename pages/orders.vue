@@ -63,8 +63,7 @@
 	</MainLayout>
 </template>
 
-<script setup lang="ts">
-import { type Orders } from '@prisma/client';
+<script setup>
 import MainLayout from '~/layouts/MainLayout.vue';
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();

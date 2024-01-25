@@ -9,7 +9,7 @@ export default defineEventHandler(async (event: any) => {
 			where: { userId: userId },
 			orderBy: { id: 'desc' },
 			include: {
-				favoriteIte: {
+				favoriteItems: {
 					include: {
 						product: true,
 					},
