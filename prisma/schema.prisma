@@ -19,18 +19,18 @@ model Addresses {
 }
 
 model Favorites {
-  id            Int            @id @default(autoincrement())
-  userId        String         @db.Uuid
-  favoriteItems FavoriteItem[] // Renomeado para `favoriteItems` e alterado para plural para indicar uma relação de um-para-muitos
+  id           Int            @id @default(autoincrement())
+  userId       String         @db.Uuid
+  favoriteItem FavoriteItem[]
 }
 
 model FavoriteItem {
   id          Int       @id @default(autoincrement())
   productId   Int
   created_at  DateTime? @default(now()) @db.Timestamptz(6)
-  product     Products  @relation(fields: [productId], references: [id])
   favoritesId Int
-  favorites   Favorites @relation(fields: [favoritesId], references: [id]) // Renomeado para `favorites` para indicar o relacionamento de muitos-para-um
+  Favorites   Favorites @relation(fields: [favoritesId], references: [id])
+  product     Products  @relation(fields: [productId], references: [id])
 }
 
 model Orders {
@@ -71,10 +71,10 @@ model Products {
   price              Int
   categoryId         Int
   discountPercentage Int            @default(0)
-  category           Category       @relation(fields: [categoryId], references: [id])
-  orderItem          OrderItem[]
-  FavoriteItem       FavoriteItem[]
   created_at         DateTime?      @default(now()) @db.Timestamptz(6)
+  FavoriteItem       FavoriteItem[]
+  orderItem          OrderItem[]
+  category           Category       @relation(fields: [categoryId], references: [id])
 }
 
 model Extras {

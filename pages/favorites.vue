@@ -17,7 +17,7 @@
 						class="text-sm pl-[50px]"
 					>
 						<div class="border-b py-1">
-							<div v-for="item in favorite.favoriteItems" :key="item.id">
+							<div v-for="item in favorite.favoriteItem" :key="item.id">
 								<NuxtLink
 									class="flex items-center gap-3 p-1 hover:underline hover:text-blue-500"
 									:to="`/item/${item.productId}`"
