@@ -12,7 +12,7 @@
 						<img
 							class="h-auto max-h-[80%] w-auto max-w-[90%]"
 							sizes="100vw"
-							:src="product.imageUrls"
+							:src="product.imageUrls[0]"
 						/>
 					</div>
 				</div>
@@ -44,15 +44,9 @@
 </template>
 
 <script setup lang="ts">
-interface Product {
-	id: number;
-	price: number;
-	imageUrls: string;
-	discountPercentage?: number;
-	title: string;
-}
+import { type Products } from '@prisma/client';
 
-const props = defineProps<{ product: Product }>();
+const props = defineProps<{ product: Products }>();
 const { product } = toRefs(props);
 
 const user = useSupabaseUser();

@@ -30,43 +30,48 @@
 	</section>
 </template>
 
-<script setup>
-import { ref, onBeforeMount, computed } from 'vue';
-import { useProductStore } from '~/stores/productStore';
+<script setup lang="ts">
+const selectedCategory = ref<number | null>(null);
+import { fetchCategories, fetchProducts } from '~/lib/services/productService';
 const userStore = useUserStore();
 
-const productStore = useProductStore();
+import { type Category, type Products } from '@prisma/client';
 
-const selectedCategory = ref(null);
-const { fetchCategories } = productStore; // have all non reactiave stuff here
-const { categories } = storeToRefs(productStore);
+const categories = ref<Category[]>([]);
+const products = ref<Products[]>([]);
 
 const loadCategories = async () => {
 	try {
-		await fetchCategories();
+		categories.value = await fetchCategories();
 		userStore.isLoading = false;
 	} catch (error) {
 		console.error('Erro ao carregar categorias:', error);
-	} finally {
 		userStore.isLoading = false;
 	}
 };
 
-loadCategories();
+const loadProducts = async () => {
+	try {
+		products.value = await fetchProducts();
+		userStore.isLoading = false;
+	} catch (error) {
+		console.error('Erro ao carregar produtos:', error);
+		userStore.isLoading = false;
+	}
+};
 
-const handleCategoryClick = async (categoryId) => {
+loadCategories(); // Carrega as categorias ao iniciar o componente
+loadProducts(); // Carrega os produtos ao iniciar o componente
+
+const handleCategoryClick = (categoryId: number) => {
 	selectedCategory.value = categoryId;
 };
 
 const filteredProducts = computed(() => {
 	const categoryId = selectedCategory.value;
-
-	if (!categoryId || !productStore.products) {
-		return productStore.products || [];
+	if (!categoryId || !products.value) {
+		return products.value || [];
 	}
-
-	return productStore.products.filter(
-		(product) => product.categoryId === categoryId
-	);
+	return products.value.filter((product) => product.categoryId === categoryId);
 });
 </script>

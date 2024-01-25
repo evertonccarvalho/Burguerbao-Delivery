@@ -31,6 +31,10 @@ export const useUserStore = defineStore({
 			// ... outras propriedades para limpar
 		},
 	},
-
-	persist: true,
+	persist: {
+		storage: persistedState.cookiesWithOptions({
+			sameSite: 'lax',
+		}),
+	},
+	// persist: true,
 });
