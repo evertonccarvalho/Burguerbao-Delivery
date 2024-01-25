@@ -11,7 +11,7 @@
 					{{ userStore.favorites.length }}
 				</span>
 
-				<Icon name="mdi:heart" size="33" />
+				<Icon name="mdi:heart" size="28" />
 			</div>
 			Favoritos
 		</button>

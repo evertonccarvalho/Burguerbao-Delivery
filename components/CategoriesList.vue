@@ -3,7 +3,7 @@
 		<h1 class="text-2xl p-2 w-full text-center font-bold">Por Categoria</h1>
 		<div
 			v-if="categories && categories.length > 0"
-			class="flex justify-start md:justify-center md:flex-row overflow-x-auto gap-2"
+			class="flex justify-center md:justify-center md:flex-row overflow-x-auto gap-2"
 		>
 			<Category
 				v-for="category in categories"

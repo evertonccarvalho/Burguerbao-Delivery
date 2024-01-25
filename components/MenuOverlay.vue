@@ -9,7 +9,7 @@
 				@click="userStore.isMenuOverlay = false"
 				class="rounded-full p-1 hover:text-primary hover:bg-secondary"
 			>
-				<Icon name="mdi:close" size="30" />
+				<Icon name="mdi:close" size="28" />
 			</button>
 		</div>
 
@@ -20,7 +20,7 @@
 					class="relative flex items-center justify-between py-2.5 border-b px-3 hover:bg-secondary hover:text-primary cursor-pointer"
 				>
 					<div class="flex items-center text-[20px] font-semibold">
-						<Icon name="ph:pen-light" size="33" />
+						<Icon name="ph:pen-light" size="28" />
 						<span class="pl-4">Meus Pedidos</span>
 					</div>
 				</li>
@@ -30,7 +30,7 @@
 					class="relative flex items-center justify-between py-2.5 border-b px-3 hover:bg-secondary hover:text-primary cursor-pointer"
 				>
 					<div class="flex items-center text-[20px] font-semibold">
-						<Icon name="ph:shopping-cart-simple-light" size="33" />
+						<Icon name="ph:shopping-cart-simple-light" size="28" />
 						<span class="pl-4">Carrinho</span>
 					</div>
 					<div
@@ -46,7 +46,7 @@
 					class="relative flex items-center justify-between py-2.5 border-b px-3 hover:bg-secondary hover:text-primary cursor-pointer"
 				>
 					<div class="flex items-center text-[20px] font-semibold">
-						<Icon name="ph:sign-out-light" size="33" />
+						<Icon name="ph:sign-out-light" size="28" />
 						<span class="pl-4">Sair</span>
 					</div>
 				</li>
@@ -57,7 +57,7 @@
 					class="relative flex items-center justify-between py-2.5 border-b px-3 hover:bg-secondary hover:text-primary cursor-pointer"
 				>
 					<div class="flex items-center text-[20px] font-semibold">
-						<Icon name="ph:sign-in-light" size="33" />
+						<Icon name="ph:sign-in-light" size="28" />
 						<span class="pl-4">Entrar / Registrar</span>
 					</div>
 				</li>

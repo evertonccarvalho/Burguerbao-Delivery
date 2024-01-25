@@ -11,7 +11,7 @@
 				<Icon
 					v-if="isSearching"
 					name="eos-icons:loading"
-					size="25"
+					size="28"
 					class="mr-2"
 				/>
 				<button

@@ -11,7 +11,7 @@
 					{{ userStore.cart.length }}
 				</span>
 
-				<Icon name="mdi:cart" size="33" />
+				<Icon name="mdi:cart" size="28" />
 			</div>
 			Carrinho
 		</button>

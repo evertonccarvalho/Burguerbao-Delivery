@@ -53,7 +53,7 @@
 						class="mt-4 bg-gradient-to-r from-[#FE630C] to-[#FF3200] w-full rounded-full"
 					>
 						<div v-if="!isWorking">Atualizar Endereço</div>
-						<Icon v-else name="eos-icons:loading" size="25" class="mr-2" />
+						<Icon v-else name="eos-icons:loading" size="28" class="mr-2" />
 					</Button>
 				</form>
 			</div>

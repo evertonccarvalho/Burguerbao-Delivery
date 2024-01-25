@@ -5,7 +5,7 @@
 		:id="`Category-${category.id}`"
 		@click="handleClick"
 		:class="{ selected: selected }"
-		class="cursor-pointer"
+		class="cursor-pointer flex items-center flex-col gap-1 justify-center text-center"
 	>
 		<div
 			class="bg-category-item-gradient group rounded-full h-12 w-12 md:h-16 md:w-16 flex items-center justify-center"

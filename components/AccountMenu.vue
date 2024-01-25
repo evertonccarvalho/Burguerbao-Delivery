@@ -4,7 +4,7 @@
 			<div
 				class="relative flex flex-col md:flex-row gap-1 items-center justify-center hover:text-primary capitalize text-sm transition-all duration-300"
 			>
-				<Icon name="mdi:account" size="33" />
+				<Icon name="mdi:account" size="28" />
 				Conta
 			</div>
 		</DropdownMenuTrigger>
