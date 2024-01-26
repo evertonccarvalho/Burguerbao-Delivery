@@ -1,87 +1,77 @@
 <template>
 	<section class="md:grid flex flex-col md:grid-cols-9 grid-cols-1 py-4 gap-4">
-		<!-- **** -->
 		<div
-			class="w-full md:col-span-2 max-h-[620px] px-4 rounded-xl overflow-hidden bg-card/30"
+			class="w-full col-span-9 max-h-fullpx-4 rounded-xl overflow-hidden bg-card/30"
 		>
-			<h1 class="text-2xl p-2 w-full text-center font-bold">Destaque</h1>
-
-			<div class="w-full h-full flex flex-col">
-				<div v-if="products" class="flex md:flex-col overflow-x-auto gap-4">
-					<ProductComponent
-						v-for="product in products"
-						:key="product.id"
-						:product="product"
-					/>
-				</div>
+			<div class="flex gap-2 flex-col">
+				<h1 class="text-2xl p-2 w-full text-center bg font-bold">
+					Mais Vendidos
+				</h1>
+				<template v-for="category in categories" :key="category.id">
+					<div v-if="hasProductsForCategory(category.id)">
+						<h2 class="text-xl p-2 w-full text-center bg font-bold">
+							{{ category.name }}
+						</h2>
+						<div class="flex flex-row pb-1 overflow-x-auto gap-x-4">
+							<ProductComponent
+								v-for="product in getProductsForCategory(category.id)"
+								:key="product.id"
+								:product="product"
+							/>
+						</div>
+					</div>
+				</template>
 			</div>
 		</div>
-
-		<!-- **** -->
-		<div
-			class="w-full col-span-4 max-h-[620px] px-4 rounded-xl overflow-hidden bg-card/30"
-		>
-			<h1 class="text-2xl p-2 w-full text-center bg font-bold">
-				Mais Vendidos
-			</h1>
-
-			<div class="flex flex-col">
-				<div
-					v-if="products && products.length > 0"
-					class="flex flex-row pb-4 overflow-x-auto gap-x-4"
-				>
-					<ProductComponent
-						v-for="product in products"
-						:key="product.id"
-						:product="product"
-					/>
-				</div>
-				<div v-if="products" class="flex flex-row pb-4 overflow-x-auto gap-x-4">
-					<ProductComponent
-						v-for="product in products"
-						:key="product.id"
-						:product="product"
-					/>
-				</div>
-			</div>
-		</div>
-		<!-- **** -->
-		<div
-			class="w-full md:col-span-3 max-h-[620px] px-4 rounded-xl overflow-hidden bg-card/30"
-		>
-			<h1 class="text-2xl p-2 w-full text-center font-bold">Lançamentos</h1>
-
-			<div class="w-full h-full flex flex-col">
-				<div v-if="products" class="flex md:flex-col gap-4 overflow-x-auto">
-					<ProductComponent
-						v-for="product in products"
-						:key="product.id"
-						:product="product"
-					/>
-				</div>
-			</div>
-		</div>
-		<!-- **** -->
 	</section>
 </template>
 
 <script setup lang="ts">
 import { useUserStore } from '~/stores/user';
 import { type Products } from '@prisma/client';
-import { fetchProducts } from '~/lib/services/productService';
+import {
+	categories,
+	products,
+	fetchCategories,
+	fetchProducts,
+	filteredProducts,
+} from '~/lib/services/productService';
 
 const userStore = useUserStore();
-const products = ref<Products[]>([]);
+
+const loadCategories = async () => {
+	try {
+		categories.value = await fetchCategories();
+		// Carregamento das categorias concluído com sucesso
+	} catch (error) {
+		console.error('Erro ao carregar categorias:', error);
+	} finally {
+		userStore.isLoading = false; // Define isLoading como false independentemente do resultado do carregamento
+	}
+};
 
 const loadProducts = async () => {
 	try {
 		products.value = await fetchProducts();
-		userStore.isLoading = false;
+		// Carregamento dos produtos concluído com sucesso
 	} catch (error) {
 		console.error('Erro ao carregar produtos:', error);
-		userStore.isLoading = false;
+	} finally {
+		userStore.isLoading = false; // Define isLoading como false independentemente do resultado do carregamento
 	}
 };
 
+const hasProductsForCategory = (categoryId: number): boolean => {
+	return filteredProducts.value.some(
+		(product) => product.categoryId === categoryId
+	);
+};
+
+const getProductsForCategory = (categoryId: number): Products[] => {
+	return filteredProducts.value.filter(
+		(product) => product.categoryId === categoryId
+	);
+};
+loadCategories();
 loadProducts();
 </script>

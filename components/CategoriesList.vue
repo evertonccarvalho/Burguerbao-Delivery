@@ -31,47 +31,44 @@
 </template>
 
 <script setup lang="ts">
-const selectedCategory = ref<number | null>(null);
-import { fetchCategories, fetchProducts } from '~/lib/services/productService';
+import {
+	selectedCategory,
+	categories,
+	products,
+	fetchCategories,
+	fetchProducts,
+	filteredProducts,
+} from '~/lib/services/productService';
+
 const userStore = useUserStore();
-
-import { type Category, type Products } from '@prisma/client';
-
-const categories = ref<Category[]>([]);
-const products = ref<Products[]>([]);
+// userStore.isLoading = false;
 
 const loadCategories = async () => {
 	try {
 		categories.value = await fetchCategories();
-		userStore.isLoading = false;
+		// Carregamento das categorias concluído com sucesso
 	} catch (error) {
 		console.error('Erro ao carregar categorias:', error);
-		userStore.isLoading = false;
+	} finally {
+		userStore.isLoading = false; // Define isLoading como false independentemente do resultado do carregamento
 	}
 };
 
 const loadProducts = async () => {
 	try {
 		products.value = await fetchProducts();
-		userStore.isLoading = false;
+		// Carregamento dos produtos concluído com sucesso
 	} catch (error) {
 		console.error('Erro ao carregar produtos:', error);
-		userStore.isLoading = false;
+	} finally {
+		userStore.isLoading = false; // Define isLoading como false independentemente do resultado do carregamento
 	}
 };
-
-loadCategories(); // Carrega as categorias ao iniciar o componente
-loadProducts(); // Carrega os produtos ao iniciar o componente
 
 const handleCategoryClick = (categoryId: number) => {
 	selectedCategory.value = categoryId;
 };
 
-const filteredProducts = computed(() => {
-	const categoryId = selectedCategory.value;
-	if (!categoryId || !products.value) {
-		return products.value || [];
-	}
-	return products.value.filter((product) => product.categoryId === categoryId);
-});
+loadCategories(); // Carrega as categorias ao iniciar o componente
+loadProducts(); // Carrega os produtos ao iniciar o componente
 </script>

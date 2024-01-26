@@ -17,5 +17,4 @@
 
 <script setup>
 import MainLayout from '~/layouts/MainLayout.vue';
-import { useUserStore } from '~/stores/user';
 </script>
