@@ -4,9 +4,9 @@
 			class="w-full col-span-9 max-h-fullpx-4 rounded-xl overflow-hidden bg-card/30"
 		>
 			<div class="flex gap-2 flex-col">
-				<h1 class="text-2xl p-2 w-full text-center bg font-bold">
+				<!-- <h1 class="text-2xl p-2 w-full text-center bg font-bold">
 					Mais Vendidos
-				</h1>
+				</h1> -->
 				<template v-for="category in categories" :key="category.id">
 					<div v-if="hasProductsForCategory(category.id)">
 						<h2 class="text-xl p-2 w-full text-center bg font-bold">
@@ -32,32 +32,19 @@ import { type Products } from '@prisma/client';
 import {
 	categories,
 	products,
-	fetchCategories,
 	fetchProducts,
 	filteredProducts,
 } from '~/lib/services/productService';
 
 const userStore = useUserStore();
 
-const loadCategories = async () => {
-	try {
-		categories.value = await fetchCategories();
-		// Carregamento das categorias concluído com sucesso
-	} catch (error) {
-		console.error('Erro ao carregar categorias:', error);
-	} finally {
-		userStore.isLoading = false; // Define isLoading como false independentemente do resultado do carregamento
-	}
-};
-
 const loadProducts = async () => {
 	try {
 		products.value = await fetchProducts();
-		// Carregamento dos produtos concluído com sucesso
 	} catch (error) {
 		console.error('Erro ao carregar produtos:', error);
 	} finally {
-		userStore.isLoading = false; // Define isLoading como false independentemente do resultado do carregamento
+		userStore.isLoading = false;
 	}
 };
 
@@ -72,6 +59,5 @@ const getProductsForCategory = (categoryId: number): Products[] => {
 		(product) => product.categoryId === categoryId
 	);
 };
-loadCategories();
 loadProducts();
 </script>

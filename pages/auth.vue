@@ -1,15 +1,16 @@
 <template>
-	<section class="bg-background">
+	<section>
 		<div
-			class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+			class="w-full h-screen flex items-center relative bg-no-repeat bg-cover flex-col z-50"
+			style="background-image: url('/BG.jpg')"
 		>
-			<div class="pb-6">
-				<HeaderLogo />
-			</div>
-
-			<div class="flex flex-row items-center justify-center">
-				<Login />
-				<register />
+			<div
+				class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+			>
+				<div class="flex flex-row items-center justify-center">
+					<Login />
+					<!-- <register /> -->
+				</div>
 			</div>
 		</div>
 	</section>

@@ -1,14 +1,13 @@
 <template>
-	<section class="bg-background">
+	<section>
 		<div
-			class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
+			class="flex flex-col rounded-full items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0"
 		>
 			<div class="pb-6">
 				<HeaderLogo />
 			</div>
-
 			<div
-				class="w-full bg-secondary rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0"
+				class="w-full bg-secondary rounded-xl shadow md:mt-0 sm:max-w-md xl:p-0"
 			>
 				<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 					<h1
@@ -23,7 +22,7 @@
 						<img class="w-full max-w-[30px]" src="/google-logo.png" />
 						<div>Google</div>
 					</button>
-					<form class="space-y-4 md:space-y-6" action="#">
+					<!-- <form class="space-y-4 md:space-y-6" action="#">
 						<div>
 							<label
 								for="email"
@@ -89,7 +88,7 @@
 								>Criar conta!</a
 							>
 						</p>
-					</form>
+					</form> -->
 				</div>
 			</div>
 		</div>

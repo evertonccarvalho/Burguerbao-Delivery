@@ -21,6 +21,25 @@
 			</DropdownMenuItem>
 		</DropdownMenuContent>
 		<DropdownMenuContent v-if="user">
+			<div class="flex flex-col">
+				<div class="flex items-center gap-2 py-4">
+					<Avatar>
+						<AvatarFallback>
+							{{ user.user_metadata.name?.[0].toUpperCase() }}
+						</AvatarFallback>
+
+						<AvatarImage
+							v-if="user.user_metadata.avatar_url"
+							:src="user.user_metadata.avatar_url"
+						/>
+					</Avatar>
+
+					<div class="flex flex-col">
+						<p class="font-medium">{{ user.user_metadata.name }}</p>
+						<p class="text-sm opacity-75">Boas compras!</p>
+					</div>
+				</div>
+			</div>
 			<DropdownMenuItem @click="navigateTo('/orders')"
 				>Meus Pedidos</DropdownMenuItem
 			>
@@ -37,10 +56,11 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-const client = useSupabaseClient();
-const user = useSupabaseUser();
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useUserStore } from '~/stores/user';
 const userStore = useUserStore();
+const client = useSupabaseClient();
+const user = useSupabaseUser();
 
 const handleLogout = async () => {
 	try {
