@@ -26,3 +26,5 @@ npx prisma generate
 // Reset db
 
 npx prisma db push --force-reset
+
+push
