@@ -2,7 +2,7 @@
 	<MainLayout>
 		<div
 			id="ShoppingCartPage"
-			class="mt-4 container w-full flex p-4 h-screen mx-auto px-2"
+			class="mt-4 container  justify-center w-full flex p-4 h-screen mx-auto px-2"
 		>
 			<div
 				v-if="!userStore.cart.length"

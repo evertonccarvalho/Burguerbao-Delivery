@@ -12,13 +12,26 @@
 						<h2 class="text-xl p-2 w-full text-center bg font-bold">
 							{{ category.name }}
 						</h2>
-						<div class="flex flex-row pb-1 overflow-x-auto gap-x-4">
+						<!-- <div class="flex flex-row pb-1 overflow-x-auto gap-x-4">
 							<ProductComponent
 								v-for="product in getProductsForCategory(category.id)"
 								:key="product.id"
 								:product="product"
 							/>
+						</div> -->
+						<div class="mx-2">
+
+							<Carousel class="w-full rounded-md  md:px-8 ">
+								<CarouselContent >
+										<CarouselItem  v-for="product in getProductsForCategory(category.id)" :key="product.id" class="basis-[220px] ">
+											<ProductComponent  :product="product" />	
+										</CarouselItem>
+									</CarouselContent>
+									<CarouselPrevious class="-left-0  z-50 hidden md:flex" />
+									<CarouselNext class="-right-0  z-50 hidden md:flex" />
+							</Carousel>
 						</div>
+
 					</div>
 				</template>
 			</div>
@@ -35,6 +48,7 @@ import {
 	fetchProducts,
 	filteredProducts,
 } from '~/lib/services/productService';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 
 const userStore = useUserStore();
 
